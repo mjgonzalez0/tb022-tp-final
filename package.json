@@ -1,0 +1,11 @@
+{
+  "name": "snippets",
+  "type": "module",
+  "scripts": {
+    "web:dev": "servor web index.html 8080 --reload --browse",
+    "api:dev": "node --watch api/app.js"
+  },
+  "devDependencies": {
+    "servor": "^4.0.2"
+  }
+}
