@@ -10,6 +10,7 @@
   <style>
     :root {
       --screen-size: 760px;
+      --editor-min-height: 300px;
     }
 
     body {
@@ -39,6 +40,10 @@
       width: 100%;
       max-width: var(--screen-size);
       margin-inline: auto;
+    }
+
+    .editor {
+      min-height: var(--editor-min-height);
     }
 
     @media (width <=640px) {
@@ -71,8 +76,8 @@
       </div>
 
       <div class="field">
-        <label for="code" class="label">Código</label>
-        <textarea name="code" id="code" class="textarea" required></textarea>
+        <span class="label">Código</span>
+        <div class="editor" id="editor" class="textarea"></div>
       </div>
 
       <div class="field">
@@ -98,7 +103,34 @@
   </main>
 
   <script type="module">
+    import { EditorView, basicSetup } from "https://esm.sh/codemirror";
+
     const form = document.querySelector("#new-snippet");
+    const editor = document.querySelector("#editor");
+
+    let view = new EditorView({
+      extensions: [basicSetup, EditorView.theme({
+        "&": {
+          backgroundColor: "var(--bulma-body-background-color)",
+          border: "1px solid var(--bulma-border)",
+          borderRadius: "var(--bulma-radius)",
+          overflow: "hidden",
+          minHeight: "var(--editor-min-height)"
+        },
+        ".cm-content": {
+          padding: "0",
+        },
+        ".cm-gutters": {
+          backgroundColor: "var(--bulma-body-background-color)",
+          color: "#6c6c8c",
+          borderRight: "1px solid var(--bulma-border)",
+        },
+        ".cm-activeLineGutter": {
+          backgroundColor: "var(--bulma-body-background-color)"
+        }
+      })],
+      parent: editor,
+    });
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -106,7 +138,7 @@
       const formData = new FormData(event.target)
       const snippet = {
         title: formData.get("title"),
-        code: formData.get("code"),
+        code: view.state.doc.toString(),
         visibility: formData.has("visibility"),
         runtime: formData.get("runtime")
       };
