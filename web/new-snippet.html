@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Snippet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
+  <style>
+    :root {
+      --screen-size: 760px;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
+      gap: 3rem;
+    }
+
+    header {
+      border-bottom: 1px solid var(--bulma-border);
+    }
+
+    nav {
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .page {
+      width: 100%;
+      max-width: var(--screen-size);
+      margin-inline: auto;
+    }
+
+    @media (width <=640px) {
+      .page {
+        padding-inline: 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a href="/" class="logo">Snippets</a>
+
+      <div>
+        <a href="/perfil.html" type="button" class="button is-ghost">Perfil</a>
+        <button type="button" class="button">Cerrar sesión</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1 class="title">Crear Snippet</h1>
+
+    <form id="new-snippet">
+      <div class="field">
+        <label for="title" class="label">Título</label>
+        <input type="text" name="title" id="title" class="input" required>
+      </div>
+
+      <div class="field">
+        <label for="code" class="label">Código</label>
+        <textarea name="code" id="code" class="textarea" required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="visibility" class="checkbox">
+          <input type="checkbox" name="visibility" id="visibility" checked>
+          ¿Es público?
+        </label>
+      </div>
+
+      <div class="field">
+        <label for="runtime" class="label">Lenguaje</label>
+        <div class="select">
+          <select id="runtime" name="runtime">
+            <option>JavaScript</option>
+            <option>Python</option>
+            <option>Bash</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="button is-primary">Publicar</button>
+    </form>
+  </main>
+
+  <script type="module">
+    const form = document.querySelector("#new-snippet");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(event.target)
+      const snippet = {
+        title: formData.get("title"),
+        code: formData.get("code"),
+        visibility: formData.has("visibility"),
+        runtime: formData.get("runtime")
+      };
+
+      console.log(snippet);
+    });
+  </script>
+</body>
+
+</html>
