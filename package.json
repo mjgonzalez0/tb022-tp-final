@@ -3,9 +3,13 @@
   "type": "module",
   "scripts": {
     "web:dev": "servor web index.html 8080 --reload --browse",
-    "api:dev": "node --watch api/app.js"
+    "api:dev": "node --watch api/index.js"
   },
   "devDependencies": {
     "servor": "^4.0.2"
+  },
+  "dependencies": {
+    "pg": "^8.16.3",
+    "express": "^5.1.0"
   }
 }
