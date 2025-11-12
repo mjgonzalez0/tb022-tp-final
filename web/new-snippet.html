@@ -81,21 +81,24 @@
       </div>
 
       <div class="field">
+        <label for="runtime" class="label">Lenguaje</label>
+        <div class="select">
+          <select id="runtime" name="runtime" required>
+            <option value="" disabled selected>Selecciona un lenguaje</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="javascript">JavaScript</option>
+            <option value="sql">SQL</option>
+            <option value="markdown">Markdown</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
         <label for="visibility" class="checkbox">
           <input type="checkbox" name="visibility" id="visibility" checked>
           ¿Es público?
         </label>
-      </div>
-
-      <div class="field">
-        <label for="runtime" class="label">Lenguaje</label>
-        <div class="select">
-          <select id="runtime" name="runtime">
-            <option>JavaScript</option>
-            <option>Python</option>
-            <option>Bash</option>
-          </select>
-        </div>
       </div>
 
       <button type="submit" class="button is-primary">Publicar</button>
@@ -103,33 +106,23 @@
   </main>
 
   <script type="module">
-    import { EditorView, basicSetup } from "https://esm.sh/codemirror";
+    import {
+      initializeCodeEditor,
+      loadLanguageConfig,
+      resetCodeEditor,
+      getCodeEditorValue,
+    } from "./js/editor.js";
+
+    initializeCodeEditor(
+      document.querySelector("#editor"),
+    );
 
     const form = document.querySelector("#new-snippet");
-    const editor = document.querySelector("#editor");
+    const runtimeSelect = document.querySelector("#runtime");
 
-    let view = new EditorView({
-      extensions: [basicSetup, EditorView.theme({
-        "&": {
-          backgroundColor: "var(--bulma-body-background-color)",
-          border: "1px solid var(--bulma-border)",
-          borderRadius: "var(--bulma-radius)",
-          overflow: "hidden",
-          minHeight: "var(--editor-min-height)"
-        },
-        ".cm-content": {
-          padding: "0",
-        },
-        ".cm-gutters": {
-          backgroundColor: "var(--bulma-body-background-color)",
-          color: "#6c6c8c",
-          borderRight: "1px solid var(--bulma-border)",
-        },
-        ".cm-activeLineGutter": {
-          backgroundColor: "var(--bulma-body-background-color)"
-        }
-      })],
-      parent: editor,
+    runtimeSelect.addEventListener("change", async (event) => {
+      const runtime = event.target.value;
+      await loadLanguageConfig(runtime);
     });
 
     form.addEventListener("submit", async (event) => {
@@ -138,12 +131,13 @@
       const formData = new FormData(event.target)
       const snippet = {
         title: formData.get("title"),
-        code: view.state.doc.toString(),
+        code: getCodeEditorValue(),
         visibility: formData.has("visibility"),
-        runtime: formData.get("runtime")
+        runtime: formData.get("runtime"),
       };
 
-      console.log(snippet);
+      form.reset();
+      resetCodeEditor();
     });
   </script>
 </body>
