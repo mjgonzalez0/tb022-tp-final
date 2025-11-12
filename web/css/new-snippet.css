@@ -1,0 +1,43 @@
+:root {
+  --screen-size: 760px;
+  --editor-min-height: 300px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  gap: 3rem;
+}
+
+header {
+  border-bottom: 1px solid var(--bulma-border);
+}
+
+nav {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  text-decoration: none;
+  color: inherit;
+}
+
+.page {
+  width: 100%;
+  max-width: var(--screen-size);
+  margin-inline: auto;
+}
+
+.editor {
+  min-height: var(--editor-min-height);
+}
+
+@media (width <=640px) {
+  .page {
+    padding-inline: 0.75rem;
+  }
+}

@@ -6,52 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crear Snippet</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
-
-  <style>
-    :root {
-      --screen-size: 760px;
-      --editor-min-height: 300px;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100dvh;
-      gap: 3rem;
-    }
-
-    header {
-      border-bottom: 1px solid var(--bulma-border);
-    }
-
-    nav {
-      padding: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .page {
-      width: 100%;
-      max-width: var(--screen-size);
-      margin-inline: auto;
-    }
-
-    .editor {
-      min-height: var(--editor-min-height);
-    }
-
-    @media (width <=640px) {
-      .page {
-        padding-inline: 0.75rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="./css/new-snippet.css">
 </head>
 
 <body>
@@ -105,41 +60,7 @@
     </form>
   </main>
 
-  <script type="module">
-    import {
-      initializeCodeEditor,
-      loadLanguageConfig,
-      resetCodeEditor,
-      getCodeEditorValue,
-    } from "./js/editor.js";
-
-    initializeCodeEditor(
-      document.querySelector("#editor"),
-    );
-
-    const form = document.querySelector("#new-snippet");
-    const runtimeSelect = document.querySelector("#runtime");
-
-    runtimeSelect.addEventListener("change", async (event) => {
-      const runtime = event.target.value;
-      await loadLanguageConfig(runtime);
-    });
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      const formData = new FormData(event.target)
-      const snippet = {
-        title: formData.get("title"),
-        code: getCodeEditorValue(),
-        visibility: formData.has("visibility"),
-        runtime: formData.get("runtime"),
-      };
-
-      form.reset();
-      resetCodeEditor();
-    });
-  </script>
+  <script type="module" src="./js/new-snippet.js"></script>
 </body>
 
 </html>
