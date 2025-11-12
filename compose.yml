@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:18-alpine
+    restart: always
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DATABASE_USER:-root}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-root}
+      POSTGRES_DB: ${DATABASE_NAME:-snippets}
+    ports:
+      - 5432:5432
+    volumes:
+      - snippets_db:/var/lib/postgresql/data
+
+      # Esto inicializa la base de datos ejecutando el script `init.sql`. 
+      # Solo se ejecuta la primera vez que se hace `docker compose up` y el volumen está vacío.
+      # https://hub.docker.com/_/postgres/#initialization-scripts
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  snippets_db:
