@@ -174,7 +174,7 @@ export function guestMiddleware(req, res, next) {
 
   try {
     jwt.verify(token, CONFIG.jwt.secret);
-    return res.sendStatus(403); // sessión activa con token válido.
+    return res.sendStatus(403); // sesión activa con token válido.
   } catch (_) {
     next();
   }
