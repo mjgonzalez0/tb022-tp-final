@@ -79,11 +79,7 @@ usersRouter.post("/login", guestMiddleware, async (req, res) => {
       });
     };
 
-    const payload = {
-      id: user.id,
-      email: user.email,
-      username: user.username,
-    };
+    const payload = { id: user.id, email: user.email };
 
     // https://github.com/auth0/node-jsonwebtoken?tab=readme-ov-file#usage
     const accessToken = jwt.sign(payload, CONFIG.jwt.secret, {
