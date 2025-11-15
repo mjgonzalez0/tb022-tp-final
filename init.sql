@@ -10,14 +10,6 @@ create table
     updated_at timestamptz default null
   );
 
--- Sesiones
-create table
-  sessions (
-    id text primary key,
-    user_id uuid not null references users (id),
-    expires_at timestamptz not null
-  );
-
 -- Snippets
 create table
   snippets (
