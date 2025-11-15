@@ -125,6 +125,90 @@ usersRouter.get("/", authMiddleware, async (req, res) => {
   }
 });
 
+usersRouter.patch("/", authMiddleware, async (req, res) => {
+  const { username, bio } = req.body;
+  const userId = req.user.id;
+
+  const queryColumns = [];
+  const queryValues = [];
+  let valuesCount = 1;
+
+  if (typeof username === "string" && username.length > 3 && username.length < 60) {
+    queryColumns.push(`username = $${valuesCount}`);
+    queryValues.push(username);
+    valuesCount++;
+  }
+
+  if (typeof bio === "string" && bio.trim().length > 0) {
+    queryColumns.push(`bio = $${valuesCount}`);
+    queryValues.push(bio.trim());
+    valuesCount++;
+  }
+
+  // Nada para actualizar o no los campos no son validos.
+  if (queryColumns.length === 0) {
+    return res.status(400).json({
+      error: "No se proporcionaron campos válidos para actualizar",
+    });
+  }
+
+  queryValues.push(userId);
+
+  try {
+    await pool.query(
+      `UPDATE users SET ${queryColumns.join(", ")}, updated_at = NOW() WHERE id = $${valuesCount}`,
+      queryValues,
+    );
+
+    return res.status(200).json({
+      message: "Perfil actualizado correctamente",
+    });
+  } catch (_) {
+    return res.status(500).json({
+      error: "No se pudo actualizar el perfil"
+    });
+  }
+});
+
+usersRouter.delete("/", authMiddleware, async (req, res) => {
+  const userId = req.user.id;
+  const { password } = req.body;
+
+  if (!password) {
+    return res.status(400).json({
+      error: "La contraseña es requerida",
+    });
+  }
+
+  try {
+    const { rows, rowCount } = await pool.query(
+      "SELECT password FROM users WHERE id = $1",
+      [userId],
+    );
+
+    if (rowCount !== 1) {
+      return res.status(404).json({
+        error: "Usuario no encontrado",
+      });
+    }
+
+    const user = rows.at(0);
+    if (!await verify(user.password, password)) {
+      // Las contraseñas no coinciden.
+      return res.status(500).json({
+        error: "No se pudo borrar la cuenta",
+      });
+    }
+
+    await pool.query("DELETE FROM users WHERE id = $1", [userId]);
+    return res.sendStatus(204);
+  } catch (e) {
+    return res.status(500).json({
+      error: "No se pudo borrar la cuenta"
+    });
+  }
+});
+
 function extractTokenFromRequest(req) {
   const authHeader = req.header("Authorization");
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
