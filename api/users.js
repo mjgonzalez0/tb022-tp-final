@@ -6,6 +6,7 @@ import { pool } from "./db.js";
 import { CONFIG } from "./config.js";
 
 const DATABASE_UNIQUE_CONSTRAINT_VIOLATION_CODE = "23505";
+const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
 export const usersRouter = Router();
 
@@ -18,10 +19,22 @@ usersRouter.post("/", guestMiddleware, async (req, res) => {
     });
   }
 
+  if (email.length > 255 || !EMAIL_REGEX.test(email)) {
+    return res.status(422).json({
+      error: "El formato del email es inválido",
+    });
+  }
+
   if (username.length < 3 || username.length > 60) {
     return res.status(422).json({
       error: "El usuario debe tener entre 3 y 60 caracteres",
     })
+  }
+
+  if (password.length < 8) {
+    return res.status(422).json({
+      error: "La contraseña debe tener al menos 8 caracteres",
+    });
   }
 
   if (password !== password_confirmation) {
