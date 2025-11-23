@@ -7,20 +7,10 @@
   <title>Crear Snippet</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
   <link rel="stylesheet" href="./css/new-snippet.css">
+  <link rel="stylesheet" href="./css/shared.css">
 </head>
 
 <body>
-  <header>
-    <nav class="container">
-      <a href="/" class="logo">Snippets</a>
-
-      <div>
-        <a href="/perfil.html" type="button" class="button is-ghost">Perfil</a>
-        <button type="button" class="button">Cerrar sesión</button>
-      </div>
-    </nav>
-  </header>
-
   <main class="page">
     <h1 class="title">Crear Snippet</h1>
 
@@ -59,6 +49,10 @@
       <button type="submit" class="button is-primary">Publicar</button>
     </form>
   </main>
+
+  <div class="center" id="loading-state">
+    <span class="spinner"></span>
+  </div>
 
   <script type="module" src="./js/new-snippet.js"></script>
 </body>
