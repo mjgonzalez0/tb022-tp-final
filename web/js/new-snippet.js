@@ -12,7 +12,7 @@ import { getAccessToken } from "./token.js";
 
 await initializePage({
   requiresAuth: true,
-  onReady: (user) => {
+  onReady: async (user) => {
     const editor = document.querySelector("#editor");
     const form = document.querySelector("#new-snippet");
     const runtimeSelect = document.querySelector("#runtime");

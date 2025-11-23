@@ -11,7 +11,7 @@ import { redirect, ROUTES } from "./routes";
 export async function initializePage({
   requiresAuth = false,
   guestOnly = false,
-  onReady = () => {},
+  onReady = async () => {},
 }) {
   const loader = document.querySelector("#loading-state");
 
@@ -27,5 +27,5 @@ export async function initializePage({
   }
 
   loader?.remove();
-  onReady(user);
+  await onReady(user);
 }
