@@ -35,3 +35,5 @@ create table
     created_at timestamptz not null default now (),
     updated_at timestamptz default null
   );
+
+ALTER TABLE users ADD avatar TEXT NOT NULL DEFAULT '';
