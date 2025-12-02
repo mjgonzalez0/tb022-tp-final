@@ -78,8 +78,8 @@ usersRouter.post("/login", guestMiddleware, async (req, res) => {
   }
 
   try {
-    const { rows, rowCount } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-    if (rowCount === 0) {
+    const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    if (rows.length !== 1) {
       return res.status(400).json({
         error: "El email o la contraseña son invalidos"
       });
@@ -112,12 +112,12 @@ usersRouter.post("/login", guestMiddleware, async (req, res) => {
 usersRouter.get("/", authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
-    const { rows, rowCount } = await pool.query(
+    const { rows } = await pool.query(
       "SELECT id, username, email, bio, created_at, updated_at FROM users WHERE id = $1",
       [userId],
     );
 
-    if (rowCount === 0) {
+    if (rows.length !== 1) {
       return res.status(404).json({
         error: "Usuario no encontrado",
       });
@@ -190,12 +190,12 @@ usersRouter.delete("/", authMiddleware, async (req, res) => {
   }
 
   try {
-    const { rows, rowCount } = await pool.query(
+    const { rows } = await pool.query(
       "SELECT password FROM users WHERE id = $1",
       [userId],
     );
 
-    if (rowCount !== 1) {
+    if (rows.length !== 1) {
       return res.status(404).json({
         error: "Usuario no encontrado",
       });
