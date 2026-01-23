@@ -6,15 +6,15 @@ export function initializeHeader(user) {
 
   header.innerHTML = /* html */`
     <nav class="container">
-      <a href="/" class="logo">Snippets</a>
+      <a href="/" class="heading-level-6">Snippets</a>
 
-      <div>
+      <div class="u-flex u-gap-12">
         ${user
       ? `
-            <a href=${ROUTES.PROFILE} type="button" class="button is-ghost">Perfil</a>
+            <a href=${ROUTES.PROFILE} type="button" class="button is-secondary">Perfil</a>
             <button type="button" class="button" id="logout-btn">Cerrar sesión</button>
           `
-      : `<a href=${ROUTES.LOGIN} class="button is-ghost">Iniciar sesión</a>`
+      : `<a href=${ROUTES.LOGIN} class="button">Iniciar sesión</a>`
     }
       </div>
     </nav>

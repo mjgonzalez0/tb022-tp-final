@@ -1,60 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Crear Snippet</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crear Snippet</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
-  <link rel="stylesheet" href="./css/new-snippet.css">
-  <link rel="stylesheet" href="./css/shared.css">
-</head>
+        <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@appwrite.io/pink-icons"
+        />
 
-<body>
-  <main class="page">
-    <h1 class="title">Crear Snippet</h1>
+        <link rel="stylesheet" href="./css/shared.css" />
+        <link rel="stylesheet" href="./css/new-snippet.css" />
+    </head>
 
-    <form id="new-snippet">
-      <div class="field">
-        <label for="title" class="label">Título</label>
-        <input type="text" name="title" id="title" class="input" required>
-      </div>
+    <body class="theme-dark">
+        <main class="page">
+            <h1 class="heading-level-2">Crear Snippet</h1>
 
-      <div class="field">
-        <span class="label">Código</span>
-        <div class="editor" id="editor" class="textarea"></div>
-      </div>
+            <form id="new-snippet" class="form">
+                <ul class="form-list">
+                    <li class="form-item">
+                        <label for="title" class="label">Título</label>
+                        <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            class="input-text"
+                            required
+                        />
+                    </li>
 
-      <div class="field">
-        <label for="runtime" class="label">Lenguaje</label>
-        <div class="select">
-          <select id="runtime" name="runtime" required>
-            <option value="" disabled selected>Selecciona un lenguaje</option>
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="javascript">JavaScript</option>
-            <option value="sql">SQL</option>
-            <option value="markdown">Markdown</option>
-          </select>
+                    <li class="form-item">
+                        <span class="label">Código</span>
+                        <div class="editor" id="editor" class="textarea"></div>
+                    </li>
+
+                    <li class="form-item">
+                        <label for="runtime" class="label">Lenguaje</label>
+                        <div class="select">
+                            <select id="runtime" name="runtime" required>
+                                <option value="" disabled selected>
+                                    Selecciona un lenguaje
+                                </option>
+                                <option value="html">HTML</option>
+                                <option value="css">CSS</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="sql">SQL</option>
+                                <option value="markdown">Markdown</option>
+                            </select>
+                            <span
+                                class="icon-cheveron-down"
+                                aria-hidden="true"
+                            ></span>
+                        </div>
+                    </li>
+
+                    <li class="form-item">
+                        <label for="visibility">
+                            <input
+                                type="checkbox"
+                                name="visibility"
+                                id="visibility"
+                                checked
+                            />
+                            ¿Es público?
+                        </label>
+                    </li>
+
+                    <button type="submit" class="button is-primary">
+                        Publicar
+                    </button>
+                </ul>
+            </form>
+        </main>
+
+        <div id="loading-state">
+            <div class="loader"></div>
         </div>
-      </div>
 
-      <div class="field">
-        <label for="visibility" class="checkbox">
-          <input type="checkbox" name="visibility" id="visibility" checked>
-          ¿Es público?
-        </label>
-      </div>
-
-      <button type="submit" class="button is-primary">Publicar</button>
-    </form>
-  </main>
-
-  <div class="center" id="loading-state">
-    <span class="spinner"></span>
-  </div>
-
-  <script type="module" src="./js/new-snippet.js"></script>
-</body>
-
+        <script type="module" src="./js/new-snippet.js"></script>
+    </body>
 </html>

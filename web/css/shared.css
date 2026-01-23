@@ -1,56 +1,49 @@
-.center {
-  display: flex;
-  flex-direction: column;
-  min-height: 100dvh;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+:root {
+    --screen-size: 760px;
+    --editor-min-height: 300px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    gap: 3rem;
+}
+
+.page {
+    width: 100%;
+    max-width: var(--screen-size);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    @media (width <= 640px) {
+        padding-inline: 0.75rem;
+    }
 }
 
 #loading-state {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: var(--bulma-primary-00);
-  z-index: 500;
+    height: 100dvh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: hsl(var(--color-neutral-105));
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.spinner {
-  width: 48px;
-  height: 48px;
-  border: 5px solid var(--bulma-primary);
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-}
-
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Estilos para header.js */
 header {
-  border-bottom: 1px solid var(--bulma-border);
-  margin-bottom: 1.5rem;
+    border-bottom: 1px solid hsl(var(--color-border));
+    margin-bottom: 1.5rem;
 }
 
 nav {
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-
-.logo {
-  text-decoration: none;
-  color: inherit;
-}
-
