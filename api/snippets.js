@@ -38,6 +38,49 @@ snippetsRouter.post("/", authMiddleware, async (req, res) => {
   }
 });
 
+snippetsRouter.put("/:snippetId", authMiddleware, async (req, res) => {
+  const snippetId = getSnippetIdFromReq(req);
+  if (!snippetId) {
+    return res.status(400).json({
+      message: "Snippet id inválido",
+      data: {
+        id: req.params.snippetId,
+      },
+    });
+  }
+
+  const { title, visibility, code, runtime } = req.body;
+  if (!title || !code || !runtime) {
+    return res.status(400).json({
+      message: "Todos los campos son requeridos",
+    });
+  }
+
+  const userId = req.user.id;
+  try {
+    const { rows } = await pool.query(
+      `UPDATE snippets
+       SET title = $1, is_public = $2, code = $3, runtime = $4, updated_at = NOW()
+       WHERE id = $5 AND user_id = $6
+       RETURNING *`,
+      [title, visibility, code, runtime, snippetId, userId],
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({
+        message: "Snippet no encontrado o no tienes permisos",
+      });
+    }
+
+    return res.json({
+      data: rows.at(0),
+    });
+  } catch (e) {
+    console.log(e);
+    return res.sendStatus(500);
+  }
+});
+
 snippetsRouter.delete("/:snippetId", authMiddleware, async (req, res) => {
   const snippetId = getSnippetIdFromReq(req);
   if (!snippetId) {
