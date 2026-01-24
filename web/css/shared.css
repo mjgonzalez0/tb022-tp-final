@@ -1,0 +1,49 @@
+:root {
+    --screen-size: 760px;
+    --editor-min-height: 300px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    gap: 3rem;
+}
+
+.page {
+    width: 100%;
+    max-width: var(--screen-size);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    @media (width <= 640px) {
+        padding-inline: 0.75rem;
+    }
+}
+
+#loading-state {
+    height: 100dvh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: hsl(var(--color-neutral-105));
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    border-bottom: 1px solid hsl(var(--color-border));
+    margin-bottom: 1.5rem;
+}
+
+nav {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
