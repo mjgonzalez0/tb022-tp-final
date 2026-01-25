@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authMiddleware } from "./users.js";
+import { authMiddleware, getCurrentUser } from "./users.js";
 import { pool } from "./db.js";
 
 export const snippetsRouter = Router();
@@ -155,6 +155,7 @@ snippetsRouter.get("/me", authMiddleware, async (req, res) => {
 });
 
 snippetsRouter.get("/:snippetId", async (req, res) => {
+  const user = getCurrentUser(req);
   const snippetId = getSnippetIdFromReq(req);
   if (!snippetId) {
     return res.status(404).json({
@@ -171,10 +172,11 @@ snippetsRouter.get("/:snippetId", async (req, res) => {
         s.upvotes,
         s.runtime,
         s.user_id,
+        s.is_public,
         s.created_at,
         s.updated_at,
         u.username
-      FROM snippets s INNER JOIN users u ON s.user_id = u.id WHERE s.is_public = true AND s.id = $1`,
+      FROM snippets s INNER JOIN users u ON s.user_id = u.id WHERE s.id = $1`,
       [snippetId],
     );
 
@@ -183,9 +185,17 @@ snippetsRouter.get("/:snippetId", async (req, res) => {
         message: "Snippet no encontrado",
       });
     }
+    
+    const snippet = rows.at(0);
+    
+    const isOwner = user && snippet.user_id === user.id;
+    if (!snippet.is_public && !isOwner) {
+      console.log(`Acceso denegado: usuario ${user.id} intento acceder al snippet ${snippet.id}`);
+      return res.status(404).json({ message: "Snippet no encontrado" });
+    }
 
     return res.json({
-      data: rows.at(0),
+      data: snippet,
     });
   } catch (_) {
     return res.sendStatus(500);
