@@ -9,6 +9,8 @@ await initializePage({
     initializeHeader(user);
 
     const selectOrderEl = document.querySelector("#results-order");
+    const emptyState = document.getElementById("empty-state");
+
     let selectedOrder = selectOrderEl.value;
 
     selectOrderEl.addEventListener("change", (e) => {
@@ -24,7 +26,11 @@ await initializePage({
       return;
     }
 
-    console.log({ error, data });
+    if (data.length === 0) {
+      emptyState.removeAttribute("hidden");
+      return;
+    }
+
     renderSnippets(data);
   },
 });
