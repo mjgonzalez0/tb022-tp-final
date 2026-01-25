@@ -11,14 +11,24 @@ await initializePage({
     const selectOrderEl = document.querySelector("#results-order");
     const emptyState = document.getElementById("empty-state");
 
-    let selectedOrder = selectOrderEl.value;
+    let snippetsData = [];
 
-    selectOrderEl.addEventListener("change", (e) => {
-      if (e.target.value === selectOrderEl) {
-        return;
+    selectOrderEl.addEventListener("change", (event) => {
+      let sortedData = [...snippetsData];
+      switch (event.target.value) {
+        case "newest":
+          sortedData.sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at),
+          );
+          break;
+        case "oldest":
+          sortedData.sort(
+            (a, b) => new Date(a.created_at) - new Date(b.created_at),
+          );
+          break;
       }
 
-      // TODO: modificar orden.
+      renderSnippets(sortedData);
     });
 
     const { error, data } = await getSnippets();
@@ -31,6 +41,7 @@ await initializePage({
       return;
     }
 
+    snippetsData = data;
     renderSnippets(data);
   },
 });
@@ -51,6 +62,7 @@ async function getSnippets() {
 
 function renderSnippets(snippets) {
   const container = document.querySelector("#snippets-list");
+  container.innerHTML = "";
 
   snippets.forEach((snippet) => {
     const item = document.createElement("li");
