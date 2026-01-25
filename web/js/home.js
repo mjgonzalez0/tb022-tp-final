@@ -9,7 +9,8 @@ await initializePage({
     initializeHeader(user);
 
     const selectOrderEl = document.querySelector("#results-order");
-    const emptyState = document.getElementById("empty-state");
+    const emptyState = document.querySelector("#empty-state");
+    const errorState = document.querySelector("#error-state");
 
     let snippetsData = [];
 
@@ -33,6 +34,12 @@ await initializePage({
 
     const { error, data } = await getSnippets();
     if (error) {
+      errorState.removeAttribute("hidden");
+
+      document.querySelector("#retry-btn").addEventListener("click", () => {
+        window.location.reload();
+      });
+
       return;
     }
 
@@ -50,7 +57,7 @@ async function getSnippets() {
   try {
     const response = await fetch(`${API_URL}/snippets`);
     if (!response.ok) {
-      throw new Error("");
+      throw new Error("No se pudieron obtener resultados");
     }
 
     const snippets = await response.json();
