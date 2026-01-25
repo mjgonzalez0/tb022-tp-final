@@ -6,7 +6,7 @@ export const snippetsRouter = Router();
 
 snippetsRouter.post("/", authMiddleware, async (req, res) => {
   const userId = req.user.id;
-  const { title, visibility, code, runtime } = req.body;
+  const { title, is_public: visibility, code, runtime } = req.body;
 
   if (!title || !code || !runtime) {
     return res.status(400).json({
@@ -49,7 +49,7 @@ snippetsRouter.put("/:snippetId", authMiddleware, async (req, res) => {
     });
   }
 
-  const { title, visibility, code, runtime } = req.body;
+  const { title, is_public: visibility, code, runtime } = req.body;
   if (!title || !code || !runtime) {
     return res.status(400).json({
       message: "Todos los campos son requeridos",
@@ -63,7 +63,7 @@ snippetsRouter.put("/:snippetId", authMiddleware, async (req, res) => {
        SET title = $1, is_public = $2, code = $3, runtime = $4, updated_at = NOW()
        WHERE id = $5 AND user_id = $6
        RETURNING *`,
-      [title, visibility, code, runtime, snippetId, userId],
+      [title, Boolean(visibility), code, runtime, snippetId, userId],
     );
 
     if (rows.length === 0) {
@@ -75,7 +75,7 @@ snippetsRouter.put("/:snippetId", authMiddleware, async (req, res) => {
     return res.json({
       data: rows.at(0),
     });
-  } catch (_) {
+  } catch (e) {
     return res.sendStatus(500);
   }
 });

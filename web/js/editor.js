@@ -58,8 +58,8 @@ const EDITOR_THEME = EditorView.theme({
 const languageConfig = new Compartment();
 let editorView;
 
-export function initializeCodeEditor(parent) {
-  loadLanguageConfig(DEFAULT_LANGUAGE);
+export async function initializeCodeEditor(parent) {
+  await loadLanguageConfig(DEFAULT_LANGUAGE);
 
   editorView = new EditorView({
     extensions: [
@@ -116,4 +116,15 @@ export function resetCodeEditor() {
 
 export function getCodeEditorValue() {
   return editorView.state.doc.toString();
+}
+
+export function setEditorValue(value) {
+  let transaction = editorView.state.update({
+    changes: {
+      from: 0,
+      insert: value,
+    }
+  });
+
+  editorView.dispatch(transaction);
 }
