@@ -6,7 +6,7 @@ import {
   getCodeEditorValue,
 } from "./editor.js";
 import { initializeHeader } from "./header.js";
-import { ROUTES } from "./routes.js";
+import { redirect, ROUTES } from "./routes.js";
 import { initializePage } from "./setup-page.js";
 import { getAccessToken } from "./token.js";
 
