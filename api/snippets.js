@@ -6,7 +6,7 @@ export const snippetsRouter = Router();
 
 snippetsRouter.post("/", authMiddleware, async (req, res) => {
   const userId = req.user.id;
-  const { title, is_public: visibility, code, runtime } = req.body;
+  const { title, visibility: is_public, code, runtime } = req.body;
 
   if (!title || !code || !runtime) {
     return res.status(400).json({
@@ -17,7 +17,7 @@ snippetsRouter.post("/", authMiddleware, async (req, res) => {
   try {
     const { rows } = await pool.query(
       "INSERT INTO snippets (title, code, is_public, runtime, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING id",
-      [title, code, Boolean(visibility), runtime, userId],
+      [title, code, Boolean(is_public), runtime, userId],
     );
 
     if (rows.length !== 1) {
@@ -49,7 +49,7 @@ snippetsRouter.put("/:snippetId", authMiddleware, async (req, res) => {
     });
   }
 
-  const { title, is_public: visibility, code, runtime } = req.body;
+  const { title, visibility: is_public, code, runtime } = req.body;
   if (!title || !code || !runtime) {
     return res.status(400).json({
       message: "Todos los campos son requeridos",
@@ -63,7 +63,7 @@ snippetsRouter.put("/:snippetId", authMiddleware, async (req, res) => {
        SET title = $1, is_public = $2, code = $3, runtime = $4, updated_at = NOW()
        WHERE id = $5 AND user_id = $6
        RETURNING *`,
-      [title, Boolean(visibility), code, runtime, snippetId, userId],
+      [title, Boolean(is_public), code, runtime, snippetId, userId],
     );
 
     if (rows.length === 0) {
