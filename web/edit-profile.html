@@ -52,11 +52,60 @@
                     Actualizar
                 </button>
 
-                <button type="button" id="delete-btn" class="button is-secondary">
+                <button
+                    type="button"
+                    id="show-delete-modal"
+                    class="button is-secondary"
+                >
                     <span class="icon-trash" aria-hidden="true"></span>
                     Borrar cuenta
                 </button>
             </div>
+
+            <dialog class="modal" id="confirmation-modal">
+                <header class="modal-header">
+                    <h4 class="modal-title heading-level-4">Borrar cuenta</h4>
+                </header>
+
+                <div class="modal-body">
+                    <form id="delete-account-form" class="form">
+                        <ul class="form-list">
+                            <li class="form-item">
+                                <label class="label" for="password">
+                                    Contraseña
+                                </label>
+                                <input
+                                    type="password"
+                                    class="input-text"
+                                    id="password"
+                                    name="password"
+                                    required
+                                    minlength="8"
+                                />
+                            </li>
+                        </ul>
+                    </form>
+
+                    <div class="actions">
+                        <button
+                            type="submit"
+                            class="button"
+                            form="delete-account-form"
+                        >
+                            <span class="icon-trash" aria-hidden="true"></span>
+                            Borrar
+                        </button>
+
+                        <button
+                            type="button"
+                            class="button is-secondary"
+                            id="cancel-btn"
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </dialog>
         </main>
 
         <script type="module" src="./js/edit-profile.js"></script>
