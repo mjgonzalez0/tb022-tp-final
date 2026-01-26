@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Editar perfil</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@appwrite.io/pink-icons"
+        />
+
+        <link rel="stylesheet" href="./css/shared.css" />
+        <link rel="stylesheet" href="./css/edit-profile.css" />
+    </head>
+    <body class="theme-dark">
+        <main class="page">
+            <h1 class="heading-level-3">Editar perfil</h1>
+
+            <form id="profile-form" class="form">
+                <ul class="form-list">
+                    <li class="form-item">
+                        <label class="label" for="username">
+                            Nombre de usuario
+                        </label>
+                        <input
+                            type="text"
+                            class="input-text"
+                            id="username"
+                            name="username"
+                            required
+                            minlength="3"
+                            maxlength="60"
+                        />
+                    </li>
+
+                    <li class="form-item">
+                        <label class="label" for="bio"> Biografia </label>
+                        <textarea
+                            class="input-text"
+                            name="bio"
+                            id="bio"
+                        ></textarea>
+                    </li>
+                </ul>
+            </form>
+
+            <div class="actions">
+                <button type="submit" class="button" form="profile-form">
+                    <span class="icon-user-circle" aria-hidden="true"></span>
+                    Actualizar
+                </button>
+
+                <button type="button" id="delete-btn" class="button is-secondary">
+                    <span class="icon-trash" aria-hidden="true"></span>
+                    Borrar cuenta
+                </button>
+            </div>
+        </main>
+
+        <script type="module" src="./js/edit-profile.js"></script>
+    </body>
+</html>
