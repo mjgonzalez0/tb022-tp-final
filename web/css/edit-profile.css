@@ -6,6 +6,9 @@
 
 .modal-header {
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
 .modal-body {
