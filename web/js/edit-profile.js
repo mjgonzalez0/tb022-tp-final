@@ -10,12 +10,14 @@ await initializePage({
     initializeHeader(user);
 
     const fields = {
+      email: document.querySelector("#email"),
       username: document.querySelector("#username"),
       bio: document.querySelector("#bio"),
     };
 
     fields.username.value = user.data.username;
     fields.bio.value = user.data.bio;
+    fields.email.value = user.data.email;
 
     document
       .querySelector("#profile-form")
