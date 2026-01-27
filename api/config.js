@@ -7,13 +7,13 @@ try {
 }
 
 export const CONFIG = {
-  port: process.env.PORT,
+  port: process.env.API_PORT,
   database: {
     username: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     name: process.env.DATABASE_NAME,
   },
   jwt: {
-    secret: process.env.TOKEN_SECRET,
-  }
+    secret: process.env.API_AUTH_SECRET,
+  },
 };
