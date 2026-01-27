@@ -34,7 +34,7 @@ cp .env.example .env
 | `DATABASE_USER`     | Usuario de la base de datos          | user                |
 | `DATABASE_NAME`     | Nombre de la base de datos           | snippets            |
 
-> [!DANGER]
+> [!WARNING]
 > No modifiques el puerto del servidor API (`API_PORT`). La aplicación web está configurada para conectarse al puerto 5000.
 
 3. Ejecutar los servicios
