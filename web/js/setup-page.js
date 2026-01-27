@@ -1,5 +1,5 @@
-import { getCurrentUser } from "./auth";
-import { redirect, ROUTES } from "./routes";
+import { getCurrentUser } from "./auth.js";
+import { redirect, ROUTES } from "./routes.js";
 
 // Inicializa la página siguiendo este flujo:
 // 
