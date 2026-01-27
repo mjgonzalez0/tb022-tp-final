@@ -1,6 +1,10 @@
 import { loadEnvFile } from "node:process";
 
-loadEnvFile();
+try {
+  loadEnvFile();
+} catch (_) {
+  console.log("No se pudo leer el archivo '.env'");
+}
 
 export const CONFIG = {
   port: process.env.PORT,
