@@ -6,7 +6,6 @@ import { API_URL } from "./constants.js";
 import { codeToHtml } from "https://esm.sh/shiki@3.0.0";
 
 await initializePage({
-  requiresAuth: true,
   onReady: async (user) => {
     initializeHeader(user);
 
