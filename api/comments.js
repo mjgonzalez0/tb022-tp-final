@@ -66,7 +66,8 @@ commentsRouter.get("/snippets/:snippetId/comments", async (req, res) => {
         c.snippet_id,
         c.created_at,
         c.updated_at,
-        u.username
+        u.username,
+        u.id as user_id
       FROM comments c
       INNER JOIN users u ON c.user_id = u.id
       WHERE c.snippet_id = $1
