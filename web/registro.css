@@ -15,24 +15,12 @@ body {
     background-repeat: no-repeat; 
     background-attachment: fixed;
 }
-#sin-correo {
+p.MensajeError {
     color: var(--color-letra-error);
-}
-#sin-usuario {
-    color: var(--color-letra-error); 
+
 }
 #boton-atras {
     padding: 0px 7px 0px 0px;
-}
-.contraseñas_incorrectas {
-    color: var(--color-letra-error);
-}
-#usuario_usado{
-    color: var(--color-letra-error);
-}
-#correo_invalido {
-    color: var(--color-letra-error);
-
 }
 
 .card {
