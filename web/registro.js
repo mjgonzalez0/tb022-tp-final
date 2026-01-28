@@ -1,49 +1,59 @@
 const formulario = document.getElementById("formulario");
 
-const password = document.getElementById("contraseña");
-const confirmPassword = document.getElementById("confirmarcontraseña");
+const inputUser = document.getElementById("usuario");
+const inputCorreo = document.getElementById("correo");
+const inputPassword = document.getElementById("contraseña");
+const inputConfirmPassword = document.getElementById("confirmarcontraseña");
 
-const passwordNotMatch = document.getElementById("errorcontraseña1");
-const passwordNotMatch2  = document.getElementById("errorcontraseña2");
+const mensajesCorreo = document.getElementById("textCorreo");
+const mensajesUser = document.getElementById("textUsuario");
+const mensajePassword1 = document.getElementById("mensajeContraseña");
+const mensajePassword2  = document.getElementById("mensajeRepContraseña");
 
-const passwordLength = document.getElementById("largoContraseña")
-
-const emptyUser = document.getElementById("usuario");
-const emptyCorreo = document.getElementById("correo");
-
-const mensajeSinUser = document.getElementById("sin-usuario");
-const mensajeSinCorreo = document.getElementById("sin-correo");
-
+const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
 formulario.addEventListener("submit", (evento) => {
-    mensajeSinUser.textContent = "";
-    mensajeSinCorreo.textContent = "";
-    if(!formulario.checkValidity()){
+
+    mensajesUser.textContent = "";
+    mensajesCorreo.textContent = "";
+
+    if(!formulario.checkValidity() ){
         evento.preventDefault();
-        if (emptyUser.value === ""){
-            mensajeSinUser.textContent = "Es obligatorio colocar un usuario"
+        if (inputUser.value === ""){
+            mensajesUser.textContent = "Es obligatorio colocar un usuario"
         }
-        if (emptyCorreo.value === ""){
-            mensajeSinCorreo.textContent = "Es obligatorio colocar un correo"
+        if (inputCorreo.value === ""){
+            mensajesCorreo.textContent = "Es obligatorio colocar un correo"
         }
-        
+        if (inputCorreo.value.length > 255 || !EMAIL_REGEX.test(inputCorreo.value)) {
+        mensajesCorreo.textContent = "La estructura del correo es inválida";
+    }
+    }
+
+
+
+});
+inputCorreo.addEventListener("input",() => {
+
+    if (inputCorreo.value.length > 255 || !EMAIL_REGEX.test(inputCorreo.value)) {
+        mensajesCorreo.textContent = "La estructura del correo es invalida"
     }else {
+        mensajesCorreo.textContent = ""
 
     }
-});
-
-password.addEventListener("input",() => {
-if (password.value.length < 8) {
-    passwordLength.textContent = "La contraseña debe tener al menos 8 caracteres";
-} else {
-    passwordLength.textContent = "";
-    
-}})
-confirmPassword.addEventListener("input",() => {
-    if (confirmPassword.value !== password.value) {
-        passwordNotMatch.textContent = "Las contraseñas no coinciden";
-        passwordNotMatch2.textContent = "Las contraseñas no coinciden";
+})
+inputPassword.addEventListener("input",() => {
+    if (inputPassword.value.length < 8) {
+        mensajePassword1.textContent = "La contraseña debe tener al menos 8 caracteres";
     } else {
-        passwordNotMatch.textContent = "";
-        passwordNotMatch2.textContent = "";
-    }})
+        mensajePassword1.textContent = "";
+        
+}})
+inputConfirmPassword.addEventListener("input",() => {
+    if (inputConfirmPassword.value !== inputPassword.value) {
+        mensajePassword1.textContent = "Las contraseñas no coinciden";
+        mensajePassword2.textContent = "Las contraseñas no coinciden";
+    } else {
+        mensajePassword1.textContent = "";
+        mensajePassword2.textContent = "";
+}})
