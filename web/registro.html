@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="registro.css">
 </head>
 <body>
-    <button id="boton-atras" class="button is-secondary" aria-label="Add new item">
-        <span class="icon-cheveron-left" aria-hidden="true"></span>
-        <span class="text">Atrás</span>
-    </button>
+    <!-- <button id="boton_cambio_de_tema" class="icon-plus" aria-label="Add new item">
+        <span class="button is-only-icon" aria-hidden="true"></span>
+        <span class="text"></span>
+    </button> -->
     <article class="card">
-        <form action="/registro" method="POST" class="form u-width-full-line u-max-width-500">
+        <form id="formulario" action="/registro" method="POST" class="form u-width-full-line u-max-width-500" novalidate>
             <h3 class="heading-level-3 u-text-center" >Crear Cuenta</h3>
             <ul class="form-list">
                 <li class="form-item">
@@ -25,8 +25,10 @@
                         type="email" 
                         class="input-text" 
                         name="correo" 
+                        maxlength="255"
                         placeholder="Ejemplo@gmail.com" 
                         required>
+                        <p id="correo_invalido"></p>
                     </div>
                 </li>
                 <li class="form-item">
@@ -36,30 +38,42 @@
                         type="text" 
                         class="input-text" 
                         name="nombre" 
+                        minlength="3"
+                        maxlength="60"
                         placeholder="Nombre de usuario " 
                         required>
+                        <p id="usuario_usado"></p>
                     </div>
                 </li>
-                <li class="form-item">
+                <li class="form-item ">
                     <label class="label" for="name">Contraseña</label>
                     <div  class="input-text-wrapper">
                         <input 
                         type="password" 
                         class="input-text" 
                         name="contraseña" 
+                        id="contraseña"
+                        minlength="8"
                         placeholder="Debe contener más de 8 carácteres" 
                         required>
+                        <p id="largoContraseña" class="contraseñas_incorrectas"></p>
+                        <p id="errorcontraseña1" class="contraseñas_incorrectas"></p>
                     </div>
                 </li>
-                <li class="form-item">
+                <li class="form-item ">
                     <label class="label" for="name">Confirmación de Contraseña</label>
                     <div  class="input-text-wrapper">
                         <input 
                         type="password" 
                         class="input-text" 
-                        name="contraseña Repetir" 
+                        name="confirmarcontraseña" 
+                        id="confirmarcontraseña"
+                        minlength="8"
                         placeholder="Repetir Contraseña" 
                         required>
+
+                        <p id="errorcontraseña2" class="contraseñas_incorrectas"></p>
+
                     </div>
                 </li>
                 <button class="button is-text">
@@ -71,6 +85,12 @@
                 </div>
             </ul>
         </form>
+        <button id="boton-atras" class="button is-secondary" aria-label="Add new item">
+            <span class="icon-cheveron-left" aria-hidden="true"></span>
+            <span class="text">Atrás</span>
+        </button>
     </article>
+    <script src="registro.js"> </script>
 </body>
+
 </html>
