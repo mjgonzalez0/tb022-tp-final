@@ -13,10 +13,14 @@ body {
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
-    
     background-attachment: fixed;
 }
-
+#sin-correo {
+    color: var(--color-letra-error);
+}
+#sin-usuario {
+    color: var(--color-letra-error); 
+}
 #boton-atras {
     padding: 0px 7px 0px 0px;
 }

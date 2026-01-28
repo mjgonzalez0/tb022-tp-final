@@ -19,22 +19,24 @@
             <h3 class="heading-level-3 u-text-center" >Crear Cuenta</h3>
             <ul class="form-list">
                 <li class="form-item">
-                    <label class="label" for="name">Correo electrónico</label>
+                    <label class="label" for="correo electrónico">Correo electrónico</label>
                     <div  class="input-text-wrapper">
                         <input 
+                        id="correo"
                         type="email" 
                         class="input-text" 
                         name="correo" 
                         maxlength="255"
                         placeholder="Ejemplo@gmail.com" 
                         required>
-                        <p id="correo_invalido"></p>
+                        <p id="sin-correo" class="campo-vacio"></p>
                     </div>
                 </li>
                 <li class="form-item">
-                    <label class="label" for="name">Usuario</label>
+                    <label class="label" for="usuario">Usuario</label>
                     <div  class="input-text-wrapper">
                         <input 
+                        id="usuario"
                         type="text" 
                         class="input-text" 
                         name="nombre" 
@@ -42,11 +44,11 @@
                         maxlength="60"
                         placeholder="Nombre de usuario " 
                         required>
-                        <p id="usuario_usado"></p>
+                        <p id="sin-usuario" class="campo-vacio"></p>
                     </div>
                 </li>
                 <li class="form-item ">
-                    <label class="label" for="name">Contraseña</label>
+                    <label class="label" for="contraseña">Contraseña</label>
                     <div  class="input-text-wrapper">
                         <input 
                         type="password" 
@@ -61,7 +63,7 @@
                     </div>
                 </li>
                 <li class="form-item ">
-                    <label class="label" for="name">Confirmación de Contraseña</label>
+                    <label class="label" for="confirmar contraseña">Confirmación de Contraseña</label>
                     <div  class="input-text-wrapper">
                         <input 
                         type="password" 
@@ -71,19 +73,17 @@
                         minlength="8"
                         placeholder="Repetir Contraseña" 
                         required>
-
                         <p id="errorcontraseña2" class="contraseñas_incorrectas"></p>
-
                     </div>
                 </li>
-                <button class="button is-text">
-                    <span class="body-text-2 u-underline">¿Ya tienes una cuenta?</span>
-                </button>
-                <div class="u-flex u-main-end u-gap-12">
-                    <button class="button is-secondary" type="button">Cancel</button>
-                    <button class="button" type="submit">Registrarse</button>
-                </div>
             </ul>
+            <button class="button is-text">
+                <span class="body-text-2 u-underline">¿Ya tienes una cuenta?</span>
+            </button>
+            <div class="u-flex u-main-end u-gap-12">
+                <button class="button is-secondary" type="button">Cancel</button>
+                <button class="button" type="submit">Registrarse</button>
+            </div>
         </form>
         <button id="boton-atras" class="button is-secondary" aria-label="Add new item">
             <span class="icon-cheveron-left" aria-hidden="true"></span>
