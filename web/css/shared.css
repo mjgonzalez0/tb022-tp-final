@@ -49,6 +49,9 @@ nav {
     justify-content: space-between;
 }
 
+dialog:not([open]) {
+    display: none;
+}
 .badge {
     display: inline-flex;
     align-items: center;

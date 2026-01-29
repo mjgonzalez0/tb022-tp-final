@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Editar perfil</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@appwrite.io/pink-icons"
+        />
+
+        <link rel="stylesheet" href="./css/shared.css" />
+        <link rel="stylesheet" href="./css/edit-profile.css" />
+    </head>
+    <body class="theme-dark">
+        <main class="page">
+            <h1 class="heading-level-3">Editar perfil</h1>
+
+            <form id="profile-form" class="form">
+                <ul class="form-list">
+                    <li class="form-item">
+                        <label for="email" class="label">Correo electrónico</label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            class="input-text"
+                            readonly
+                        />
+                    </li>
+
+                    <li class="form-item">
+                        <label class="label" for="username">
+                            Nombre de usuario
+                        </label>
+                        <input
+                            type="text"
+                            class="input-text"
+                            id="username"
+                            name="username"
+                            required
+                            minlength="3"
+                            maxlength="60"
+                        />
+                    </li>
+
+                    <li class="form-item">
+                        <label class="label" for="bio"> Biografia </label>
+                        <textarea
+                            class="input-text"
+                            name="bio"
+                            id="bio"
+                        ></textarea>
+                    </li>
+                </ul>
+            </form>
+
+            <div class="actions">
+                <button type="submit" class="button" form="profile-form">
+                    <span class="icon-user-circle" aria-hidden="true"></span>
+                    Actualizar
+                </button>
+
+                <button
+                    type="button"
+                    id="show-delete-modal"
+                    class="button is-secondary"
+                >
+                    <span class="icon-trash" aria-hidden="true"></span>
+                    Borrar cuenta
+                </button>
+            </div>
+
+            <dialog class="modal is-small" id="confirmation-modal">
+                <header class="modal-header">
+                    <h4 class="modal-title heading-level-5">Borrar cuenta</h4>
+                    <p class="text u-small">
+                        Esta acción es irreversible. Al borrar tu cuenta
+                        perderás todos tus snippets y comentarios de forma
+                        permanente. Ingresa tu contraseña para continuar.
+                    </p>
+                </header>
+
+                <div class="modal-body">
+                    <form id="delete-account-form" class="form">
+                        <ul class="form-list">
+                            <li class="form-item">
+                                <label class="label" for="password">
+                                    Contraseña
+                                </label>
+                                <input
+                                    type="password"
+                                    class="input-text"
+                                    id="password"
+                                    name="password"
+                                    required
+                                    minlength="8"
+                                />
+                            </li>
+                        </ul>
+                    </form>
+
+                    <div class="actions">
+                        <button
+                            type="submit"
+                            class="button"
+                            form="delete-account-form"
+                        >
+                            <span class="icon-trash" aria-hidden="true"></span>
+                            Borrar
+                        </button>
+
+                        <button
+                            type="button"
+                            class="button is-secondary"
+                            id="cancel-btn"
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </dialog>
+        </main>
+
+        <script type="module" src="./js/edit-profile.js"></script>
+    </body>
+</html>
