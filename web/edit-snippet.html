@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Editar Snippet</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@appwrite.io/pink-icons"
+        />
+
+        <link rel="stylesheet" href="./css/shared.css" />
+        <link rel="stylesheet" href="./css/new-snippet.css" />
+    </head>
+
+    <body class="theme-dark">
+        <main class="page">
+            <h1 class="heading-level-2">Editar Snippet</h1>
+
+            <form id="edit-snippet" class="form">
+                <ul class="form-list">
+                    <li class="form-item">
+                        <label for="title" class="label">Título</label>
+                        <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            class="input-text"
+                            required
+                        />
+                    </li>
+
+                    <li class="form-item">
+                        <span class="label">Código</span>
+                        <div class="editor" id="editor" class="textarea"></div>
+                    </li>
+
+                    <li class="form-item">
+                        <label for="runtime" class="label">Lenguaje</label>
+                        <div class="select">
+                            <select id="runtime" name="runtime" required>
+                                <option value="" disabled selected>
+                                    Selecciona un lenguaje
+                                </option>
+                                <option value="html">HTML</option>
+                                <option value="css">CSS</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="sql">SQL</option>
+                                <option value="markdown">Markdown</option>
+                            </select>
+                            <span
+                                class="icon-cheveron-down"
+                                aria-hidden="true"
+                            ></span>
+                        </div>
+                    </li>
+
+                    <li class="form-item">
+                        <label for="visibility">
+                            <input
+                                type="checkbox"
+                                name="visibility"
+                                id="visibility"
+                                checked
+                            />
+                            ¿Es público?
+                        </label>
+                    </li>
+                </ul>
+            </form>
+
+            <div class="u-flex u-gap-12">
+                <button
+                    type="submit"
+                    class="button is-primary"
+                    form="edit-snippet"
+                >
+                    <span class="icon-pencil" aria-hidden="true"></span>
+                    Actualizar
+                </button>
+
+                <button
+                    type="button"
+                    class="button is-secondary"
+                    id="delete-snippet-btn"
+                >
+                    <span class="icon-trash" aria-hidden="true"></span>
+                    Borrar
+                </button>
+            </div>
+        </main>
+
+        <div id="loading-state">
+            <div class="loader"></div>
+        </div>
+
+        <script type="module" src="./js/edit-snippet.js"></script>
+    </body>
+</html>
