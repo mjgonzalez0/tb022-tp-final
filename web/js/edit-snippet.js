@@ -14,7 +14,7 @@ import { getAccessToken } from "./token.js";
 await initializePage({
   requiresAuth: true,
   onReady: async (user) => {
-    initializeHeader(user.data);
+    initializeHeader(user);
 
     const snippetId = getSnippetId();
     if (!snippetId) {
@@ -23,7 +23,7 @@ await initializePage({
     }
 
     const snippet = await getSnippetById(snippetId);
-    if (!snippet || snippet.user_id !== user.data.id) {
+    if (!snippet || snippet.user_id !== user.id) {
       redirect(ROUTES.HOME);
       return;
     }

@@ -26,7 +26,7 @@ await initializePage({
     const commentsList = document.querySelector("#comments-list");
     const commentForm = document.querySelector("#comment-form");
 
-    await renderComments(snippetId, commentsList, user.data);
+    await renderComments(snippetId, commentsList, user);
 
     commentForm.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -55,7 +55,7 @@ await initializePage({
         }
 
         commentForm.reset();
-        await renderComments(snippetId, commentsList, user.data);
+        await renderComments(snippetId, commentsList, user);
       } catch (e) {
         console.error(`HUBO UN ERROR: msg=${e.message}`);
       }
@@ -76,7 +76,7 @@ await initializePage({
     }).format(new Date(snippet.created_at));
     runtimeEl.innerHTML = snippet.runtime;
 
-    if (user.data.id !== snippet.user_id) {
+    if (user?.id !== snippet.user_id) {
       actionsEl.remove();
     } else {
       const route = ROUTES.EDIT_SNIPPET(snippetId);
