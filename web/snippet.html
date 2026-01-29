@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Snippet</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@appwrite.io/pink-icons"
+        />
+
+        <link rel="stylesheet" href="./css/shared.css" />
+        <link rel="stylesheet" href="./css/snippet.css" />
+    </head>
+    <body class="theme-dark">
+        <main class="page">
+            <section class="snippet">
+                <h1 class="heading-level-3" id="snippet_title"></h1>
+
+                <ul class="info">
+                    <li>
+                        <a href="#" class="badge">
+                            <span class="icon-user" aria-hidden="true"></span>
+                            <span class="text">
+                                Creado por <span id="snippet_author"></span>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="badge">
+                        <span class="icon-clock" aria-hidden="true"></span>
+                        <span class="text" id="snippet_creation_date"></span>
+                    </li>
+
+                    <li class="badge">
+                        <span class="icon-filter" aria-hidden="true"></span>
+                        <span class="text" id="snippet_runtime"></span>
+                    </li>
+                </ul>
+
+                <div id="actions">
+                    <a id="edit-snippet" class="button"> Editar snippet </a>
+                </div>
+
+                <div class="code-wrapper" id="snippet_code"></div>
+            </section>
+        </main>
+
+        <div id="loading-state">
+            <div class="loader"></div>
+        </div>
+
+        <script type="module" src="./js/snippet.js"></script>
+    </body>
+</html>
