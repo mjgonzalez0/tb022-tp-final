@@ -1,0 +1,28 @@
+#comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    border-left: 1px solid hsl(var(--color-border));
+    padding-left: 0.75rem;
+}
+
+.comment {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comment-header :not(:last-child)::after {
+    content: "•";
+    margin-left: 10px;
+    font-size: 1.2rem;
+    color: hsl(var(--color-text-disabled));
+    line-height: 1;
+}

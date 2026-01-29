@@ -232,6 +232,20 @@ function extractTokenFromRequest(req) {
   return token;
 }
 
+export function getCurrentUser(req) {
+  const token = extractTokenFromRequest(req);
+  if (!token) {
+    return null;
+  }
+
+  try {
+    const jwtClaims = jwt.verify(token, CONFIG.jwt.secret);
+    return jwtClaims;
+  } catch (_) {
+    return null;
+  }
+}
+
 export function authMiddleware(req, res, next) {
   const token = extractTokenFromRequest(req);
   if (!token) {

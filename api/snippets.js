@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { authMiddleware } from "./users.js";
+import { authMiddleware, getCurrentUser } from "./users.js";
 import { pool } from "./db.js";
 
 export const snippetsRouter = Router();
 
 snippetsRouter.post("/", authMiddleware, async (req, res) => {
   const userId = req.user.id;
-  const { title, visibility, code, runtime } = req.body;
+  const { title, visibility: is_public, code, runtime } = req.body;
 
   if (!title || !code || !runtime) {
     return res.status(400).json({
@@ -17,7 +17,7 @@ snippetsRouter.post("/", authMiddleware, async (req, res) => {
   try {
     const { rows } = await pool.query(
       "INSERT INTO snippets (title, code, is_public, runtime, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING id",
-      [title, code, Boolean(visibility), runtime, userId],
+      [title, code, Boolean(is_public), runtime, userId],
     );
 
     if (rows.length !== 1) {
@@ -49,7 +49,7 @@ snippetsRouter.put("/:snippetId", authMiddleware, async (req, res) => {
     });
   }
 
-  const { title, visibility, code, runtime } = req.body;
+  const { title, visibility: is_public, code, runtime } = req.body;
   if (!title || !code || !runtime) {
     return res.status(400).json({
       message: "Todos los campos son requeridos",
@@ -63,7 +63,7 @@ snippetsRouter.put("/:snippetId", authMiddleware, async (req, res) => {
        SET title = $1, is_public = $2, code = $3, runtime = $4, updated_at = NOW()
        WHERE id = $5 AND user_id = $6
        RETURNING *`,
-      [title, visibility, code, runtime, snippetId, userId],
+      [title, Boolean(is_public), code, runtime, snippetId, userId],
     );
 
     if (rows.length === 0) {
@@ -75,7 +75,7 @@ snippetsRouter.put("/:snippetId", authMiddleware, async (req, res) => {
     return res.json({
       data: rows.at(0),
     });
-  } catch (_) {
+  } catch (e) {
     return res.sendStatus(500);
   }
 });
@@ -155,6 +155,7 @@ snippetsRouter.get("/me", authMiddleware, async (req, res) => {
 });
 
 snippetsRouter.get("/:snippetId", async (req, res) => {
+  const user = getCurrentUser(req);
   const snippetId = getSnippetIdFromReq(req);
   if (!snippetId) {
     return res.status(404).json({
@@ -171,10 +172,11 @@ snippetsRouter.get("/:snippetId", async (req, res) => {
         s.upvotes,
         s.runtime,
         s.user_id,
+        s.is_public,
         s.created_at,
         s.updated_at,
         u.username
-      FROM snippets s INNER JOIN users u ON s.user_id = u.id WHERE s.is_public = true AND s.id = $1`,
+      FROM snippets s INNER JOIN users u ON s.user_id = u.id WHERE s.id = $1`,
       [snippetId],
     );
 
@@ -183,16 +185,24 @@ snippetsRouter.get("/:snippetId", async (req, res) => {
         message: "Snippet no encontrado",
       });
     }
+    
+    const snippet = rows.at(0);
+    
+    const isOwner = user && snippet.user_id === user.id;
+    if (!snippet.is_public && !isOwner) {
+      console.log(`Acceso denegado: usuario ${user.id} intento acceder al snippet ${snippet.id}`);
+      return res.status(404).json({ message: "Snippet no encontrado" });
+    }
 
     return res.json({
-      data: rows.at(0),
+      data: snippet,
     });
   } catch (_) {
     return res.sendStatus(500);
   }
 });
 
-function getSnippetIdFromReq(req) {
+export function getSnippetIdFromReq(req) {
   const snippetId = Number.parseInt(req.params.snippetId);
   if (Number.isNaN(snippetId)) {
     return null;
