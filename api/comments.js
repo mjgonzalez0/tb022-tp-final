@@ -84,6 +84,47 @@ commentsRouter.get("/snippets/:snippetId/comments", async (req, res) => {
   }
 });
 
+commentsRouter.get("/comments/:commentId", authMiddleware, async (req, res) => {
+  const commentId = getCommentId(req);
+  if (!commentId) {
+    return res.status(404).json({
+      message: "Comentario no encontrado",
+    });
+  }
+
+  const userId = req.user.id;
+  try {
+    const { rows } = await pool.query(
+      `
+      SELECT
+        id,
+        content,
+        upvotes,
+        user_id,
+        snippet_id,
+        created_at,
+        updated_at
+      FROM comments
+      WHERE id = $1 AND user_id = $2
+      `,
+      [commentId, userId],
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({
+        message: "Comentario no encontrado",
+      });
+    }
+
+    return res.json({
+      data: rows.at(0),
+    });
+  } catch (e) {
+    console.log(e);
+    return res.sendStatus(500);
+  }
+});
+
 commentsRouter.delete(
   "/comments/:commentId",
   authMiddleware,
