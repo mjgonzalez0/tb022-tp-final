@@ -19,7 +19,7 @@ create table
     is_public boolean not null default true,
     upvotes integer not null default 0,
     runtime text not null,
-    user_id uuid not null references users (id),
+    user_id uuid not null references users (id) on delete cascade,
     created_at timestamptz not null default now (),
     updated_at timestamptz default null
   );
@@ -29,8 +29,8 @@ create table
   comments (
     id serial primary key,
     content text not null,
-    user_id uuid not null references users (id),
-    snippet_id integer not null references snippets (id),
+    user_id uuid not null references users (id) on delete cascade,
+    snippet_id integer not null references snippets (id) on delete cascade,
     upvotes integer not null default 0,
     created_at timestamptz not null default now (),
     updated_at timestamptz default null
