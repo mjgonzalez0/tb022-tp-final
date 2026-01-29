@@ -18,8 +18,8 @@ export async function renderComments(id, target, user) {
     const lastModification = getRelativeTimeString(
       new Date(comment.updated_at),
     );
-    const href = ROUTES.EDIT_COMMENT(id);
-
+    const href = ROUTES.EDIT_COMMENT(comment.id);
+    
     item.innerHTML = /* html */ `
         <article class="comment">
             <div class="u-flex-vertical u-gap-8">
