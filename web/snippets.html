@@ -13,9 +13,10 @@
 
         <link rel="stylesheet" href="./css/shared.css" />
         <link rel="stylesheet" href="./css/snippet.css" />
+        <link rel="stylesheet" href="./css/comments.css" />
     </head>
     <body class="theme-dark">
-        <main class="page">
+        <main class="page u-gap-40">
             <section class="snippet">
                 <h1 class="heading-level-3" id="snippet_title"></h1>
 
@@ -41,10 +42,40 @@
                 </ul>
 
                 <div id="actions">
-                    <a id="edit-snippet" class="button"> Editar snippet </a>
+                    <a id="edit-snippet" class="button">
+                        <span class="icon-pencil" aria-hidden="true"></span>
+                        Editar snippet
+                    </a>
                 </div>
 
                 <div class="code-wrapper" id="snippet_code"></div>
+            </section>
+
+            <section class="u-flex-vertical u-gap-40">
+                <form id="comment-form" class="form u-gap-8">
+                    <ul class="form-list">
+                        <li class="form-item">
+                            <textarea
+                                type="text"
+                                name="content"
+                                id="content"
+                                class="input-text"
+                                aria-label="Contenido"
+                                placeholder="Agrega un comentario..."
+                                required
+                            ></textarea>
+                        </li>
+                    </ul>
+
+                    <button type="submit" class="button">
+                        <span class="icon-annotation" aria-hidden="true"></span>
+                        Comentar
+                    </button>
+                </form>
+
+                <h2 class="heading-level-5">Comentarios</h2>
+
+                <ul id="comments-list"></ul>
             </section>
         </main>
 

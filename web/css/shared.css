@@ -17,6 +17,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    padding-bottom: 4rem;
 
     @media (width <= 640px) {
         padding-inline: 0.75rem;
