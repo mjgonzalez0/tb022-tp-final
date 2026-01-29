@@ -2,6 +2,8 @@ import { initializePage } from "./setup-page.js";
 import { initializeHeader } from "./header.js";
 import { redirect, ROUTES } from "./routes.js";
 import { API_URL } from "./constants.js";
+import { renderComments } from "./comment-section.js";
+import { getAccessToken } from "./token.js";
 
 import { codeToHtml } from "https://esm.sh/shiki@3.0.0";
 
@@ -20,6 +22,44 @@ await initializePage({
       redirect(ROUTES.HOME);
       return;
     }
+
+    const commentsList = document.querySelector("#comments-list");
+    const commentForm = document.querySelector("#comment-form");
+
+    await renderComments(snippetId, commentsList, user.data);
+
+    commentForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
+      const accessToken = getAccessToken();
+
+      try {
+        const response = await fetch(
+          `${API_URL}/snippets/${snippetId}/comments`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              content: formData.get("content"),
+            }),
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`,
+              Accept: "application/json",
+            },
+          },
+        );
+
+        if (!response.ok) {
+          return;
+        }
+
+        commentForm.reset();
+        await renderComments(snippetId, commentsList, user.data);
+      } catch (e) {
+        console.error(`HUBO UN ERROR: msg=${e.message}`);
+      }
+    });
 
     const titleEl = document.querySelector("#snippet_title");
     const authorEl = document.querySelector("#snippet_author");
