@@ -119,8 +119,7 @@ commentsRouter.get("/comments/:commentId", authMiddleware, async (req, res) => {
     return res.json({
       data: rows.at(0),
     });
-  } catch (e) {
-    console.log(e);
+  } catch (_) {
     return res.sendStatus(500);
   }
 });
