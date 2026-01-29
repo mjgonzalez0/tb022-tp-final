@@ -6,6 +6,10 @@
     padding-left: 0.75rem;
 }
 
+section.comment-section:has(#comments-list:is(:empty)) h2 {
+    display: none;
+}
+
 .comment {
     display: flex;
     justify-content: space-between;
