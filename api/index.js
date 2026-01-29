@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/users", usersRouter);
-app.use("/comments", commentsRouter);
+app.use("/", commentsRouter);
 app.use("/snippets", snippetsRouter);
 
 app.listen(CONFIG.port, () => {

@@ -202,7 +202,7 @@ snippetsRouter.get("/:snippetId", async (req, res) => {
   }
 });
 
-function getSnippetIdFromReq(req) {
+export function getSnippetIdFromReq(req) {
   const snippetId = Number.parseInt(req.params.snippetId);
   if (Number.isNaN(snippetId)) {
     return null;
