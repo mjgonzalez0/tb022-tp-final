@@ -1,0 +1,49 @@
+.actions {
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+.snippets {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.snippet {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid hsl(var(--color-border));
+    background-color: hsl(var(--color-neutral-90));
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.info li {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.info li:not(:last-child)::after {
+    content: "•";
+    margin-left: 10px;
+    color: hsl(var(--color-blue-100));
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}

@@ -1,13 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Snippets</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Snippets</title>
-</head>
+        <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@appwrite.io/pink-icons"
+        />
 
-<body>
-</body>
+        <link rel="stylesheet" href="./css/shared.css" />
+        <link rel="stylesheet" href="./css/home.css" />
+    </head>
 
+    <body class="theme-dark">
+        <main class="page">
+            <div class="actions">
+                <div class="select">
+                    <span class="icon-filter" aria-hidden="true"></span>
+                    <select
+                        name="sort"
+                        aria-label="Ordenar por tiempo"
+                        id="results-order"
+                    >
+                        <option value="newest" disabled selected>
+                            Ordenar por fecha
+                        </option>
+                        <option value="newest">Más recientes primero</option>
+                        <option value="oldest">Más antiguos primero</option>
+                    </select>
+                </div>
+
+                <a href="/new-snippet.html" type="button" class="button">
+                    <span class="icon-plus" aria-hidden="true"></span>
+                    Crear snippet
+                </a>
+            </div>
+
+            <ul class="snippets" id="snippets-list"></ul>
+
+            <div class="card" id="error-state" hidden>
+                <p class="text heading-level-4">
+                    No se pudieron cargar los snippets.
+                </p>
+                
+                <button type="button" id="retry-btn" class="button">
+                    Reintentar
+                </button>
+            </div>
+
+            <div class="card" id="empty-state" hidden>
+                <p class="text heading-level-4">
+                    No se han creado snippets aún.
+                </p>
+                <a href="/new-snippet.html" class="button" type="button">
+                    <span class="icon-plus" aria-hidden="true"></span>
+                    Crea tu primer snippet
+                </a>
+            </div>
+        </main>
+        <script type="module" src="./js/home.js"></script>
+    </body>
 </html>
