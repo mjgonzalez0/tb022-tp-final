@@ -59,11 +59,11 @@ const languageConfig = new Compartment();
 let editorView;
 
 export async function initializeCodeEditor(parent) {
-  await loadLanguageConfig(DEFAULT_LANGUAGE);
+  const defaultLangModule = await loadLanguageModule(DEFAULT_LANGUAGE);
 
   editorView = new EditorView({
     extensions: [
-      languageConfig.of([]),
+      languageConfig.of(defaultLangModule ?? []),
       oneDark,
       EDITOR_THEME,
       lineNumbers(),
@@ -84,21 +84,30 @@ export async function initializeCodeEditor(parent) {
   });
 }
 
-export async function loadLanguageConfig(name) {
+async function loadLanguageModule(name) {
   const config = LANGUAGES_PACKAGES[name];
   if (config == null) {
-    return;
+    return null;
   }
 
   try {
     const module = await import(`https://esm.sh/${config.name}`);
-    const language = module[config.function]();
+    return module[config.function]();
+  } catch (error) {
+    console.error(
+      `Ocurrió un error al cargar la configuración del lenguaje: ${name}`,
+    );
+    return null;
+  }
+}
 
+export async function loadLanguageConfig(name) {
+  const language = await loadLanguageModule(name);
+
+  if (language && editorView) {
     editorView.dispatch({
       effects: languageConfig.reconfigure(language),
     });
-  } catch (_) {
-    console.error(`Ocurrió un error al cargar la configuración del lenguaje: ${name}`)
   }
 }
 
