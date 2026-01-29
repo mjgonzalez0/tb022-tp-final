@@ -103,7 +103,13 @@ function getSnippetId() {
 }
 
 async function getSnippetById(id) {
-  const res = await fetch(`${API_URL}/snippets/${id}`);
+  const accessToken = getAccessToken();
+  const res = await fetch(`${API_URL}/snippets/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      Accept: "application/json",
+    },
+  });
 
   if (!res.ok) {
     return null;
