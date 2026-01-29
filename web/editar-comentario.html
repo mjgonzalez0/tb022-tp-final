@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Editar comentario</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@appwrite.io/pink-icons"
+        />
+
+        <link rel="stylesheet" href="./css/shared.css" />
+        <link rel="stylesheet" href="./css/home.css" />
+    </head>
+    <body class="theme-dark">
+        <main class="page">
+            <h1 class="heading-level-2">Editar comentario</h1>
+
+            <form class="form" id="comment-form">
+                <ul class="form-list">
+                    <li class="form-item">
+                        <label for="content" class="label">Contenido</label>
+                        <textarea
+                            name="content"
+                            id="content"
+                            placeholder="Agrega un comentario"
+                            class="input-text"
+                        ></textarea>
+                    </li>
+                </ul>
+            </form>
+
+            <div class="u-flex u-gap-12">
+                <button type="submit" form="comment-form" class="button">
+                    <span class="icon-annotation" aria-hidden="true"></span>
+                    Guardar
+                </button>
+
+                <button
+                    type="button"
+                    id="delete-comment-btn"
+                    class="button is-secondary"
+                >
+                    <span class="icon-trash" aria-hidden="true"></span>
+                    Borrar
+                </button>
+            </div>
+        </main>
+
+        <div id="loading-state">
+            <div class="loader"></div>
+        </div>
+
+        <script type="module" src="./js/edit-comment.js"></script>
+    </body>
+</html>
