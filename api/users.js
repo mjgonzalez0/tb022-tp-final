@@ -131,6 +131,60 @@ usersRouter.get("/", authMiddleware, async (req, res) => {
   }
 });
 
+usersRouter.get("/:username/snippets", async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    const { rows } = await pool.query(
+      `SELECT
+        s.id,
+        s.title,
+        s.code,
+        s.is_public,
+        s.user_id,
+        s.upvotes,
+        s.runtime,
+        s.created_at,
+        s.updated_at,
+        u.username
+      FROM snippets s
+      INNER JOIN users u ON s.user_id = u.id
+      WHERE u.username = $1 
+      ORDER BY s.created_at DESC`,
+      [username],
+    );
+
+    return res.json({
+      data: rows,
+    });
+  } catch (_) {
+    return res.sendStatus(500);
+  }
+});
+
+usersRouter.get("/:username", async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    const { rows } = await pool.query(
+      "SELECT id, username, email, bio, created_at, updated_at FROM users WHERE username = $1",
+      [username]
+    );
+    
+    if (rows.length === 0) {
+      return res.status(404).json({
+        error: "Usuario no encontrado",
+      });
+    }
+
+    return res.json({
+      data: rows.at(0)
+    });
+  } catch (_) {
+    return res.sendStatus(500);
+  }
+});
+
 usersRouter.patch("/", authMiddleware, async (req, res) => {
   const { username, bio } = req.body;
   const userId = req.user.id;
@@ -256,13 +310,13 @@ export function authMiddleware(req, res, next) {
   } catch (e) {
     if (e instanceof jwt.TokenExpiredError) {
       return res.status(401).json({
-        error: "Token de acceso expirado"
+        error: "Token de acceso expirado",
       });
     }
 
     if (e instanceof jwt.JsonWebTokenError) {
       return res.status(401).json({
-        error: "Token de acceso inválido"
+        error: "Token de acceso inválido",
       });
     }
 

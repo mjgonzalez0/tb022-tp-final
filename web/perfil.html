@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Perfil</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@appwrite.io/pink-icons"
+        />
+
+        <link rel="stylesheet" href="./css/shared.css" />
+        <link rel="stylesheet" href="./css/profile.css" />
+        <link rel="stylesheet" href="./css/home.css" />
+    </head>
+
+    <body class="theme-dark">
+        <main class="page u-gap-40">
+            <section class="user-info">
+                <div class="u-max-width-500">
+                    <h1 id="user-username" class="heading-level-2"></h1>
+                    <p id="user-bio" class="text"></p>
+                    <ul class="user-metadata">
+                        <li class="badge">
+                            <span class="icon-clock" aria-hidden="true"></span>
+                            <span class="text" id="user-joined-date"></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <a
+                        href="/editar-perfil.html"
+                        class="button"
+                        id="edit-profile-btn"
+                        hidden
+                    >
+                        <span class="icon-pencil" aria-hidden="true"></span>
+                        Editar perfil
+                    </a>
+                </div>
+            </section>
+
+            <section class="snippets-list">
+                <h2 class="heading-level-4">Snippets</h2>
+
+                <ul class="snippets" id="snippets-list"></ul>
+
+                <div class="card" id="error-state" hidden>
+                    <p class="text heading-level-6">
+                        No se pudieron cargar los snippets.
+                    </p>
+
+                    <button type="button" id="retry-btn" class="button is-small">
+                        Reintentar
+                    </button>
+                </div>
+
+                <div class="card" id="empty-state" hidden>
+                    <p class="text heading-level-6">
+                        Este usuario no tiene snippets aún.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <div id="loading-state">
+            <div class="loader"></div>
+        </div>
+
+        <script type="module" src="./js/profile.js"></script>
+    </body>
+</html>
