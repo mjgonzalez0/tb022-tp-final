@@ -9,13 +9,14 @@ import {
   setEditorValue,
 } from "./editor.js";
 import { $fetch } from "./fetch.js";
+import { getIdFromParam } from "./params.js";
 
 await initializePage({
   requiresAuth: true,
   onReady: async (user) => {
     initializeHeader(user);
 
-    const snippetId = getSnippetId();
+    const snippetId = getIdFromParam();
     if (!snippetId) {
       redirect(ROUTES.HOME);
       return;
@@ -81,15 +82,3 @@ await initializePage({
     });
   },
 });
-
-function getSnippetId() {
-  const params = new URLSearchParams(window.location.search);
-
-  const value = params.get("id");
-  if (!value) {
-    return null;
-  }
-
-  const parsed = Number.parseInt(value);
-  return Number.isNaN(parsed) ? null : parsed;
-}

@@ -1,15 +1,15 @@
 import { initializePage } from "./setup-page.js";
 import { initializeHeader } from "./header.js";
 import { redirect, ROUTES } from "./routes.js";
-import { getAccessToken } from "./token.js";
 import { $fetch } from "./fetch.js";
+import { getIdFromParam } from "./params.js";
 
 await initializePage({
   requiresAuth: true,
   onReady: async (user) => {
     initializeHeader(user);
 
-    const commentId = getCommentId();
+    const commentId = getIdFromParam();
     if (!commentId) {
       redirect(ROUTES.HOME);
       return;
@@ -62,15 +62,3 @@ await initializePage({
     });
   },
 });
-
-export function getCommentId() {
-  const params = new URLSearchParams(window.location.search);
-
-  const value = params.get("id");
-  if (!value) {
-    return null;
-  }
-
-  const parsed = Number.parseInt(value);
-  return Number.isNaN(parsed) ? null : parsed;
-}

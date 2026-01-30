@@ -3,6 +3,7 @@ import { initializeHeader } from "./header.js";
 import { redirect, ROUTES } from "./routes.js";
 import { renderComments } from "./comment-section.js";
 import { $fetch } from "./fetch.js";
+import { getIdFromParam } from "./params.js";
 
 import { codeToHtml } from "https://esm.sh/shiki@3.0.0";
 
@@ -10,7 +11,7 @@ await initializePage({
   onReady: async (user) => {
     initializeHeader(user);
 
-    const snippetId = getSnippetId();
+    const snippetId = getIdFromParam();
     if (!snippetId) {
       redirect(ROUTES.HOME);
       return;
@@ -32,15 +33,12 @@ await initializePage({
 
       const formData = new FormData(event.target);
 
-      const { hasError } = await $fetch(
-        `/snippets/${snippetId}/comments`,
-        {
-          method: "POST",
-          body: {
-            content: formData.get("content"),
-          },
+      const { hasError } = await $fetch(`/snippets/${snippetId}/comments`, {
+        method: "POST",
+        body: {
+          content: formData.get("content"),
         },
-      );
+      });
 
       if (hasError) {
         console.error(`HUBO UN ERROR`);
@@ -79,15 +77,3 @@ await initializePage({
     });
   },
 });
-
-function getSnippetId() {
-  const params = new URLSearchParams(window.location.search);
-
-  const value = params.get("id");
-  if (!value) {
-    return null;
-  }
-
-  const parsed = Number.parseInt(value);
-  return Number.isNaN(parsed) ? null : parsed;
-}
