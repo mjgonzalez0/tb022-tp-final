@@ -6,6 +6,41 @@ Una plataforma para compartir snippets de código.
 
 Un snippet (fragmento en español) es un pequeño trozo de código reutilizable que resuelve un problema específico o realiza una tarea concreta, por ejemplo, una función para formatear fechas.
 
+**Funcionalidades**
+
+- Snippets públicos y privados
+- Soporte para todos los lenguajes de programación vistos en la materia
+- Autocompletado en el editor
+- Filtros básicos
+
+## Demo
+
+El boceto inicial de la aplicación. El desarrollo final difirió en algunos aspectos, pero se mantuvo la idea original.
+
+![Boceto inicial](./assets/boceto.webp)
+
+**Página de inicio**
+
+Todos los snippets públicos se listan aquí y pueden ordenarse según su fecha de creación.
+
+![Inicio](./assets/home.webp)
+
+**Visualizar snippet**
+
+Página para ver un snippet y sus comentarios. Los snippets privados solo son accesibles por su autor.
+
+![Visualizar Snippet](./assets/snippet.webp)
+
+**Editar snippet**
+
+Página para editar o eliminar un snippet. Solo accesible por el autor.
+
+![Editar Snippet](./assets/edit-snippet.webp)
+
+## Diagrama de la base de datos
+
+![Base de datos](./assets/snippets-db.webp)
+
 ## Uso
 
 > [!WARNING]
