@@ -64,7 +64,7 @@ await initializePage({
             title: formData.get("title"),
             runtime: formData.get("runtime"),
             code: getCodeEditorValue(),
-            is_public: formData.has("visibility"),
+            visibility: formData.has("visibility"),
           }),
         });
 
