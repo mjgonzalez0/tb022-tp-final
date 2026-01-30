@@ -41,10 +41,10 @@ ALTER TABLE users ADD avatar TEXT NOT NULL DEFAULT '';
 insert into users
     (id, username, email, password, bio)
 values
-    ('f26929ab-e5db-4544-acc8-bd052c6ff4b3', 'Mateo', 'mateo@example.com', 'micontrasena', 'Desarrollador Web'),
-    ('1422f821-1ac5-4324-90fe-9e34229f7987', 'antfu', 'antfu@example.com', 'sucontrasena', 'A ship in harbor is safe, but that is not what ships are built for.'),
-    ('3e302e0b-1d83-42a7-ad62-a7d13d3f0d04', 'fabian-hiller', 'fh@example.com', 'nuestracontrasena', 'Creator of Valibot, creator of Formisch, co-creator of Standard Schema and engineer at Motion'),
-    ('ec8901ec-54c7-48f1-9b3b-f33d2239cc62','joel','joel@example.com', 'vuestracontrasena', '');
+    ('f26929ab-e5db-4544-acc8-bd052c6ff4b3', 'Mateo', 'mateo@example.com', '$argon2id$v=19$m=19456,t=2,p=1$jwQ9xczE8i6RonCbWnOkrg$DTvj2Ku1l7iwGUYCsxV736vELR2zokKQaVBjUSzGsVY', 'Desarrollador Web'),
+    ('1422f821-1ac5-4324-90fe-9e34229f7987', 'antfu', 'antfu@example.com', '$argon2id$v=19$m=19456,t=2,p=1$jwQ9xczE8i6RonCbWnOkrg$DTvj2Ku1l7iwGUYCsxV736vELR2zokKQaVBjUSzGsVY', 'A ship in harbor is safe, but that is not what ships are built for.'),
+    ('3e302e0b-1d83-42a7-ad62-a7d13d3f0d04', 'fabian-hiller', 'fh@example.com', '$argon2id$v=19$m=19456,t=2,p=1$jwQ9xczE8i6RonCbWnOkrg$DTvj2Ku1l7iwGUYCsxV736vELR2zokKQaVBjUSzGsVY', 'Creator of Valibot, creator of Formisch, co-creator of Standard Schema and engineer at Motion'),
+    ('ec8901ec-54c7-48f1-9b3b-f33d2239cc62','joel','joel@example.com', '$argon2id$v=19$m=19456,t=2,p=1$jwQ9xczE8i6RonCbWnOkrg$DTvj2Ku1l7iwGUYCsxV736vELR2zokKQaVBjUSzGsVY', '');
 
 INSERT INTO snippets (title, code, is_public, runtime, user_id, created_at)
 VALUES
