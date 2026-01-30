@@ -56,6 +56,7 @@ await initializePage({
     const actionsEl = document.querySelector("#actions");
     const codeEl = document.querySelector("#snippet_code");
     const editBtnEl = document.querySelector("#edit-snippet");
+    const userProfileLink = document.querySelector("#user_profile_link");
 
     titleEl.innerHTML = snippet.title;
     authorEl.innerHTML = snippet.username;
@@ -63,6 +64,8 @@ await initializePage({
       dateStyle: "full",
     }).format(new Date(snippet.created_at));
     runtimeEl.innerHTML = snippet.runtime;
+    
+    userProfileLink.setAttribute("href", ROUTES.USER_PROFILE(snippet.username))
 
     if (user?.id !== snippet.user_id) {
       actionsEl.remove();

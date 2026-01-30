@@ -1,3 +1,10 @@
+export function getUsernameFromParam() {
+  const params = new URLSearchParams(window.location.search);
+
+  const value = params.get("username");
+  return value.trim();
+}
+
 export function getIdFromParam() {
   const params = new URLSearchParams(window.location.search);
 
