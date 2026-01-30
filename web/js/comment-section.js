@@ -1,13 +1,13 @@
-import { API_URL } from "./constants.js";
 import { getRelativeTimeString } from "./date.js";
 import { ROUTES } from "./routes.js";
+import { $fetch } from "./fetch.js";
 
 export async function renderComments(id, target, user) {
-  const comments = await getComments(id);
+  const { hasError, data: comments } = await $fetch(`/snippets/${id}/comments`);
 
   target.innerHTML = "";
 
-  if (!comments || comments.length < 1) {
+  if (hasError || !comments || comments.length < 1) {
     return;
   }
 
@@ -19,7 +19,7 @@ export async function renderComments(id, target, user) {
       new Date(comment.updated_at),
     );
     const href = ROUTES.EDIT_COMMENT(comment.id);
-    
+
     item.innerHTML = /* html */ `
         <article class="comment">
             <div class="u-flex-vertical u-gap-8">
@@ -44,18 +44,4 @@ export async function renderComments(id, target, user) {
 
     target.insertAdjacentElement("beforeend", item);
   });
-}
-
-export async function getComments(id) {
-  try {
-    const response = await fetch(`${API_URL}/snippets/${id}/comments`);
-
-    if (!response.ok) {
-      return null;
-    }
-
-    return response.json().then((c) => c.data);
-  } catch (_) {
-    return null;
-  }
 }

@@ -1,9 +1,9 @@
 import { initializePage } from "./setup-page.js";
 import { initializeHeader } from "./header.js";
 import { redirect, ROUTES } from "./routes.js";
-import { API_URL } from "./constants.js";
 import { renderComments } from "./comment-section.js";
-import { getAccessToken } from "./token.js";
+import { $fetch } from "./fetch.js";
+import { getIdFromParam } from "./params.js";
 
 import { codeToHtml } from "https://esm.sh/shiki@3.0.0";
 
@@ -11,14 +11,14 @@ await initializePage({
   onReady: async (user) => {
     initializeHeader(user);
 
-    const snippetId = getSnippetId();
+    const snippetId = getIdFromParam();
     if (!snippetId) {
       redirect(ROUTES.HOME);
       return;
     }
 
-    const snippet = await getSnippetById(snippetId);
-    if (!snippet) {
+    const { hasError, data: snippet } = await $fetch(`/snippets/${snippetId}`);
+    if (hasError || !snippet) {
       redirect(ROUTES.HOME);
       return;
     }
@@ -32,33 +32,21 @@ await initializePage({
       event.preventDefault();
 
       const formData = new FormData(event.target);
-      const accessToken = getAccessToken();
 
-      try {
-        const response = await fetch(
-          `${API_URL}/snippets/${snippetId}/comments`,
-          {
-            method: "POST",
-            body: JSON.stringify({
-              content: formData.get("content"),
-            }),
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-              Accept: "application/json",
-            },
-          },
-        );
+      const { hasError } = await $fetch(`/snippets/${snippetId}/comments`, {
+        method: "POST",
+        body: {
+          content: formData.get("content"),
+        },
+      });
 
-        if (!response.ok) {
-          return;
-        }
-
-        commentForm.reset();
-        await renderComments(snippetId, commentsList, user);
-      } catch (e) {
-        console.error(`HUBO UN ERROR: msg=${e.message}`);
+      if (hasError) {
+        console.error(`HUBO UN ERROR`);
+        return;
       }
+
+      commentForm.reset();
+      await renderComments(snippetId, commentsList, user);
     });
 
     const titleEl = document.querySelector("#snippet_title");
@@ -92,34 +80,3 @@ await initializePage({
     });
   },
 });
-
-function getSnippetId() {
-  const params = new URLSearchParams(window.location.search);
-
-  const value = params.get("id");
-  if (!value) {
-    return null;
-  }
-
-  const parsed = Number.parseInt(value);
-  return Number.isNaN(parsed) ? null : parsed;
-}
-
-async function getSnippetById(id) {
-  const accessToken = getAccessToken();
-  const res = await fetch(`${API_URL}/snippets/${id}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      Accept: "application/json",
-    },
-  });
-
-  if (!res.ok) {
-    return null;
-  }
-
-  return res
-    .json()
-    .then((c) => c.data)
-    .catch(() => null);
-}

@@ -1,22 +1,22 @@
 import { initializePage } from "./setup-page.js";
 import { initializeHeader } from "./header.js";
 import { redirect, ROUTES } from "./routes.js";
-import { getAccessToken } from "./token.js";
-import { API_URL } from "./constants.js";
+import { $fetch } from "./fetch.js";
+import { getIdFromParam } from "./params.js";
 
 await initializePage({
   requiresAuth: true,
   onReady: async (user) => {
     initializeHeader(user);
 
-    const commentId = getCommentId();
+    const commentId = getIdFromParam();
     if (!commentId) {
       redirect(ROUTES.HOME);
       return;
     }
 
-    const comment = await getCommentById(commentId);
-    if (!comment) {
+    const { hasError, data: comment } = await $fetch(`/comments/${commentId}`);
+    if (hasError || !comment) {
       redirect(ROUTES.HOME);
       return;
     }
@@ -35,87 +35,30 @@ await initializePage({
       event.preventDefault();
 
       const formData = new FormData(event.target);
-      const accessToken = getAccessToken();
 
-      try {
-        const response = await fetch(`${API_URL}/comments/${commentId}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            content: formData.get("content"),
-          }),
-        });
+      const { hasError } = await $fetch(`/comments/${commentId}`, {
+        method: "PUT",
+        body: {
+          content: formData.get("content"),
+        },
+      });
 
-        if (!response.ok) {
-          return;
-        }
-
+      if (!hasError) {
         form.reset();
         const route = ROUTES.SNIPPET(snippetId);
         redirect(route);
-      } catch (e) {
-        console.error(`HUBO UN ERROR: msg=${e.message}`);
       }
     });
 
     deleteCommentBtn.addEventListener("click", async () => {
-      const accessToken = getAccessToken();
+      const { hasError } = await $fetch(`/comments/${commentId}`, {
+        method: "DELETE",
+      });
 
-      try {
-        const response = await fetch(`${API_URL}/comments/${commentId}`, {
-          method: "DELETE",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-
-        if (!response.ok) {
-          return;
-        }
-
+      if (!hasError) {
         const route = ROUTES.SNIPPET(snippetId);
         redirect(route);
-      } catch (e) {
-        console.error(`HUBO UN ERROR: msg=${e.message}`);
       }
     });
   },
 });
-
-export function getCommentId() {
-  const params = new URLSearchParams(window.location.search);
-
-  const value = params.get("id");
-  if (!value) {
-    return null;
-  }
-
-  const parsed = Number.parseInt(value);
-  return Number.isNaN(parsed) ? null : parsed;
-}
-
-export async function getCommentById(id) {
-  const accessToken = getAccessToken();
-
-  try {
-    const response = await fetch(`${API_URL}/comments/${id}`, {
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    return response.json().then((c) => c.data);
-  } catch (_) {
-    return null;
-  }
-}

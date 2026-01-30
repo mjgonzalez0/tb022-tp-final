@@ -2,6 +2,9 @@ import { initializePage } from "./setup-page.js";
 import { initializeHeader } from "./header.js";
 import { API_URL } from "./constants.js";
 import { renderSnippets } from "./snippet-section.js";
+import { ROUTES } from "./routes.js";
+import { getRelativeTimeString } from "./date.js";
+import { $fetch } from "./fetch.js";
 
 await initializePage({
   onReady: async (user) => {
@@ -31,8 +34,8 @@ await initializePage({
       renderSnippets(sortedData);
     });
 
-    const { error, data } = await getSnippets();
-    if (error) {
+    const { hasError, data } = await $fetch("/snippets");
+    if (hasError) {
       errorState.removeAttribute("hidden");
 
       document.querySelector("#retry-btn").addEventListener("click", () => {
@@ -51,17 +54,3 @@ await initializePage({
     renderSnippets(data);
   },
 });
-
-async function getSnippets() {
-  try {
-    const response = await fetch(`${API_URL}/snippets`);
-    if (!response.ok) {
-      throw new Error("No se pudieron obtener resultados");
-    }
-
-    const snippets = await response.json();
-    return { error: null, data: snippets.data };
-  } catch (e) {
-    return { error: e.message, data: [] };
-  }
-}

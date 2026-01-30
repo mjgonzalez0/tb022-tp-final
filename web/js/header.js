@@ -9,7 +9,10 @@ export function initializeHeader(user) {
 
   header.innerHTML = /* html */`
     <nav class="container">
-      <a href="/" class="heading-level-6">Snippets</a>
+      <a href="/" class="heading-level-6 u-flex u-gap-4 u-cross-center">
+          <img src="/assets/icon.png" alt="Snippets logo" width="24" height="24">
+          Snippets
+      </a>
 
       <div class="u-flex u-gap-12">
         ${hasUser
