@@ -14,7 +14,7 @@ import { getAccessToken } from "./token.js";
 await initializePage({
   requiresAuth: true,
   onReady: async (user) => {
-    initializeHeader(user.data);
+    initializeHeader(user);
 
     const snippetId = getSnippetId();
     if (!snippetId) {
@@ -23,7 +23,7 @@ await initializePage({
     }
 
     const snippet = await getSnippetById(snippetId);
-    if (!snippet || snippet.user_id !== user.data.id) {
+    if (!snippet || snippet.user_id !== user.id) {
       redirect(ROUTES.HOME);
       return;
     }
@@ -37,7 +37,7 @@ await initializePage({
 
     title.value = snippet.title;
     runtime.value = snippet.runtime;
-    visibility.value = snippet.is_public;
+    fields.visibility.checked = snippet.is_public;
 
     await initializeCodeEditor(fields.editorParent);
     await loadLanguageConfig(snippet.runtime);
@@ -64,7 +64,7 @@ await initializePage({
             title: formData.get("title"),
             runtime: formData.get("runtime"),
             code: getCodeEditorValue(),
-            is_public: formData.has("visibility"),
+            visibility: formData.has("visibility"),
           }),
         });
 
@@ -127,7 +127,7 @@ async function getSnippetById(id) {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${accessToken}`,
-    }
+    },
   });
 
   if (!res.ok) {

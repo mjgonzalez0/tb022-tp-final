@@ -7,7 +7,7 @@ import { API_URL } from "./constants.js";
 await initializePage({
   requiresAuth: true,
   onReady: async (user) => {
-    initializeHeader(user.data);
+    initializeHeader(user);
 
     const commentId = getCommentId();
     if (!commentId) {

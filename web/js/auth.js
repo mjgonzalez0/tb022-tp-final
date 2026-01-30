@@ -4,7 +4,7 @@ import { getAccessToken } from "./token.js";
 export async function getCurrentUser() {
   const accessToken = getAccessToken();
   if (!accessToken) {
-    return null;
+    return {};
   }
 
   try {
@@ -18,11 +18,12 @@ export async function getCurrentUser() {
 
     if (!response.ok) {
       // Error de conexión o token invalido.
-      return null;
+      return {};
     }
 
-    return await response.json();
+    const user = await response.json();
+    return user?.data ?? {};
   } catch (_) {
-    return null;
+    return {};
   }
 }

@@ -1,15 +1,18 @@
 import { ROUTES } from "./routes.js";
 import { deleteAccessToken } from "./token.js";
 
+
+
 export function initializeHeader(user) {
   const header = document.createElement("header");
+  const hasUser = Object.keys(user).length !== 0
 
   header.innerHTML = /* html */`
     <nav class="container">
       <a href="/" class="heading-level-6">Snippets</a>
 
       <div class="u-flex u-gap-12">
-        ${user
+        ${hasUser
       ? `
             <a href=${ROUTES.PROFILE} type="button" class="button is-secondary">Perfil</a>
             <button type="button" class="button" id="logout-btn">Cerrar sesión</button>
@@ -22,7 +25,7 @@ export function initializeHeader(user) {
 
   document.body.insertAdjacentElement("afterbegin", header);
 
-  if (!user) {
+  if (!hasUser) {
     return;
   }
 

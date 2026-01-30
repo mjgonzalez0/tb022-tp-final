@@ -123,11 +123,8 @@ usersRouter.get("/", authMiddleware, async (req, res) => {
       });
     }
 
-    const user = rows.at(0);
     return res.status(200).json({
-      data: {
-        ...user,
-      },
+      data: rows.at(0),
     });
   } catch (e) {
     return res.sendStatus(500);
