@@ -1,6 +1,5 @@
 import { initializePage } from "./setup-page.js";
 import { initializeHeader } from "./header.js";
-import { API_URL } from "./constants.js";
 import { redirect, ROUTES } from "./routes.js";
 import { $fetch } from "./fetch.js";
 
