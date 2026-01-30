@@ -1,8 +1,8 @@
 import { initializePage } from "./setup-page.js";
 import { initializeHeader } from "./header.js";
-import { getAccessToken } from "./token.js";
 import { API_URL } from "./constants.js";
 import { redirect, ROUTES } from "./routes.js";
+import { $fetch } from "./fetch.js";
 
 await initializePage({
   requiresAuth: true,
@@ -15,9 +15,9 @@ await initializePage({
       bio: document.querySelector("#bio"),
     };
 
-    fields.username.value = user.data.username;
-    fields.bio.value = user.data.bio;
-    fields.email.value = user.data.email;
+    fields.username.value = user.username;
+    fields.bio.value = user.bio;
+    fields.email.value = user.email;
 
     document
       .querySelector("#profile-form")
@@ -25,29 +25,17 @@ await initializePage({
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        const accessToken = getAccessToken();
 
-        try {
-          const response = await fetch(`${API_URL}/users`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify({
-              username: formData.get("username"),
-              bio: formData.get("bio"),
-            }),
-          });
+        const { hasError } = await $fetch("/users", {
+          method: "PATCH",
+          body: {
+            username: formData.get("username"),
+            bio: formData.get("bio"),
+          },
+        });
 
-          if (!response.ok) {
-            return;
-          }
-
+        if (!hasError) {
           redirect(ROUTES.PROFILE);
-        } catch (e) {
-          console.error(`HUBO UN ERROR: msg=${e.message}`);
         }
       });
 
@@ -60,34 +48,22 @@ await initializePage({
       event.preventDefault();
 
       const formData = new FormData(event.target);
-      const accessToken = getAccessToken();
 
-      fetch(`${API_URL}/users`, {
+      const { hasError } = await $fetch("/users", {
         method: "DELETE",
-        body: JSON.stringify({
+        body: {
           password: formData.get("password"),
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
-      })
-        .then((res) => {
-          if (!res.ok) {
-            dialog.close();
-            console.log("No se pudo borrar la cuenta.");
-            accountDeletionForm.reset();
-            return;
-          }
+      });
 
-          redirect(ROUTES.HOME);
-        })
-        .catch(() => {
-          dialog.close();
-          accountDeletionForm.reset();
-          console.log("No se pudo borrar la cuenta.");
-        });
+      if (hasError) {
+        dialog.close();
+        console.log("No se pudo borrar la cuenta.");
+        accountDeletionForm.reset();
+        return;
+      }
+
+      redirect(ROUTES.HOME);
     });
 
     openModalBtn.addEventListener("click", async () => {
