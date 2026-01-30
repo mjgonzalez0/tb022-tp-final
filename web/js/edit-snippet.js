@@ -37,7 +37,7 @@ await initializePage({
 
     title.value = snippet.title;
     runtime.value = snippet.runtime;
-    visibility.value = snippet.is_public;
+    fields.visibility.checked = snippet.is_public;
 
     await initializeCodeEditor(fields.editorParent);
     await loadLanguageConfig(snippet.runtime);
@@ -127,7 +127,7 @@ async function getSnippetById(id) {
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${accessToken}`,
-    }
+    },
   });
 
   if (!res.ok) {
