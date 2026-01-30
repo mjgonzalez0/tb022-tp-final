@@ -1,6 +1,5 @@
 import { initializePage } from "./setup-page.js";
 import { initializeHeader } from "./header.js";
-import { API_URL } from "./constants.js";
 import { redirect, ROUTES } from "./routes.js";
 import {
   getCodeEditorValue,
@@ -9,21 +8,22 @@ import {
   resetCodeEditor,
   setEditorValue,
 } from "./editor.js";
-import { getAccessToken } from "./token.js";
+import { $fetch } from "./fetch.js";
+import { getIdFromParam } from "./params.js";
 
 await initializePage({
   requiresAuth: true,
   onReady: async (user) => {
     initializeHeader(user);
 
-    const snippetId = getSnippetId();
+    const snippetId = getIdFromParam();
     if (!snippetId) {
       redirect(ROUTES.HOME);
       return;
     }
 
-    const snippet = await getSnippetById(snippetId);
-    if (!snippet || snippet.user_id !== user.id) {
+    const { hasError, data: snippet } = await $fetch(`/snippets/${snippetId}`);
+    if (hasError || !snippet || snippet.user_id !== user.id) {
       redirect(ROUTES.HOME);
       return;
     }
@@ -50,92 +50,35 @@ await initializePage({
       event.preventDefault();
 
       const formData = new FormData(form);
-      const accessToken = getAccessToken();
 
-      try {
-        const response = await fetch(`${API_URL}/snippets/${snippetId}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            title: formData.get("title"),
-            runtime: formData.get("runtime"),
-            code: getCodeEditorValue(),
-            visibility: formData.has("visibility"),
-          }),
-        });
+      const { hasError } = await $fetch(`/snippets/${snippetId}`, {
+        method: "PUT",
+        body: {
+          title: formData.get("title"),
+          runtime: formData.get("runtime"),
+          code: getCodeEditorValue(),
+          visibility: formData.has("visibility"),
+        },
+      });
 
-        if (!response.ok) {
-          console.error(`HUBO UN ERROR: msg=${response.status}`);
-          return;
-        }
-
-        form.reset();
-        resetCodeEditor();
-
-        const route = ROUTES.SNIPPET(snippetId);
-        redirect(route);
-      } catch (e) {
-        console.error(`HUBO UN ERROR: msg=${e.message}`);
+      if (hasError) {
+        console.log("HUBO UN ERROR");
+        return;
       }
+
+      form.reset();
+      resetCodeEditor();
+      redirect(ROUTES.SNIPPET(snippetId));
     });
 
     deleteBtn.addEventListener("click", async () => {
-      const accessToken = getAccessToken();
+      const { hasError } = await $fetch(`/snippets/${snippetId}`, {
+        method: "DELETE",
+      });
 
-      try {
-        const response = await fetch(`${API_URL}/snippets/${snippetId}`, {
-          method: "DELETE",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-
-        if (!response.ok) {
-          console.error(`HUBO UN ERROR: msg=${response.status}`);
-          return;
-        }
-
-        const route = ROUTES.HOME;
-        redirect(route);
-      } catch (e) {
-        console.error(`HUBO UN ERROR: msg=${e.message}`);
+      if (!hasError) {
+        redirect(ROUTES.HOME);
       }
     });
   },
 });
-
-function getSnippetId() {
-  const params = new URLSearchParams(window.location.search);
-
-  const value = params.get("id");
-  if (!value) {
-    return null;
-  }
-
-  const parsed = Number.parseInt(value);
-  return Number.isNaN(parsed) ? null : parsed;
-}
-
-async function getSnippetById(id) {
-  const accessToken = getAccessToken();
-  const res = await fetch(`${API_URL}/snippets/${id}`, {
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!res.ok) {
-    return null;
-  }
-
-  return res
-    .json()
-    .then((c) => c.data)
-    .catch(() => null);
-}

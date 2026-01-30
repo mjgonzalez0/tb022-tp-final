@@ -1,4 +1,3 @@
-import { API_URL } from "./constants.js";
 import {
   initializeCodeEditor,
   loadLanguageConfig,
@@ -8,7 +7,7 @@ import {
 import { initializeHeader } from "./header.js";
 import { redirect, ROUTES } from "./routes.js";
 import { initializePage } from "./setup-page.js";
-import { getAccessToken } from "./token.js";
+import { $fetch } from "./fetch.js";
 
 await initializePage({
   requiresAuth: true,
@@ -29,38 +28,25 @@ await initializePage({
       event.preventDefault();
 
       const formData = new FormData(event.target);
-      const accessToken = getAccessToken();
 
-      try {
-        const response = await fetch(`${API_URL}/snippets`, {
-          method: "POST",
-          headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            title: formData.get("title"),
-            code: getCodeEditorValue(),
-            visibility: formData.has("visibility"),
-            runtime: formData.get("runtime"),
-          })
-        });
+      const { hasError, data: snippet } = await $fetch("/snippets", {
+        method: "POST",
+        body: {
+          title: formData.get("title"),
+          code: getCodeEditorValue(),
+          visibility: formData.has("visibility"),
+          runtime: formData.get("runtime"),
+        },
+      });
 
-        if (!response.ok) {
-          return;
-        }
-
-        const { data } = await response.json();
-        const snippetId = data.id;
-
-        form.reset();
-        resetCodeEditor();
-
-        redirect(ROUTES.SNIPPET(snippetId));
-      } catch (e) {
-        console.error(`HUBO UN ERROR: msg=${e.message}`);
+      if (hasError) {
+        console.error("HUBO UN ERROR");
+        return;
       }
+
+      form.reset();
+      resetCodeEditor();
+      redirect(ROUTES.SNIPPET(snippet.id));
     });
-  }
+  },
 });
