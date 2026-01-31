@@ -6,6 +6,7 @@ import { $fetch } from "./fetch.js";
 import { getIdFromParam } from "./params.js";
 
 import { codeToHtml } from "https://esm.sh/shiki@3.0.0";
+import { toast } from "https://unpkg.com/@moaqzdev/toast/utils";
 
 await initializePage({
   onReady: async (user) => {
@@ -41,10 +42,17 @@ await initializePage({
       });
 
       if (hasError) {
-        console.error(`HUBO UN ERROR`);
+        toast.error({
+          title: "Error al publicar comentario",
+          description: "No se pudo crear el comentario. Intenta nuevamente.",
+        });
         return;
       }
 
+      toast.success({
+        title: "Comentario publicado",
+        description: "Tu comentario se creó correctamente.",
+      });
       commentForm.reset();
       await renderComments(snippetId, commentsList, user);
     });

@@ -13,6 +13,7 @@
         />
 
         <link rel="stylesheet" href="./css/shared.css" />
+        <script type="module" src="https://unpkg.com/@moaqzdev/toast"></script>
     </head>
 
     <body class="theme-dark">
@@ -34,7 +35,11 @@
 
                     <li class="form-item">
                         <span class="label">Código</span>
-                        <div class="u-min-height-300" id="editor" class="textarea"></div>
+                        <div
+                            class="u-min-height-300"
+                            id="editor"
+                            class="textarea"
+                        ></div>
                     </li>
 
                     <li class="form-item">
@@ -96,6 +101,7 @@
             <div class="loader"></div>
         </div>
 
+        <moaqz-toaster duration="8000" dismissable></moaqz-toaster>
         <script type="module" src="./js/edit-snippet.js"></script>
     </body>
 </html>
