@@ -1,9 +1,6 @@
 import { initializePage } from "./setup-page.js";
 import { initializeHeader } from "./header.js";
-import { API_URL } from "./constants.js";
 import { renderSnippets } from "./snippet-section.js";
-import { ROUTES } from "./routes.js";
-import { getRelativeTimeString } from "./date.js";
 import { $fetch } from "./fetch.js";
 
 await initializePage({

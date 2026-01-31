@@ -13,7 +13,8 @@
         />
 
         <link rel="stylesheet" href="./css/shared.css" />
-        <link rel="stylesheet" href="./css/edit-profile.css" />
+        
+        <script type="module" src="https://unpkg.com/@moaqzdev/toast"></script>
     </head>
     <body class="theme-dark">
         <main class="page">
@@ -58,7 +59,7 @@
                 </ul>
             </form>
 
-            <div class="actions">
+            <div class="u-flex u-cross-center u-gap-8">
                 <button type="submit" class="button" form="profile-form">
                     <span class="icon-user-circle" aria-hidden="true"></span>
                     Actualizar
@@ -75,7 +76,7 @@
             </div>
 
             <dialog class="modal is-small" id="confirmation-modal">
-                <header class="modal-header">
+                <header class="modal-header u-flex u-flex-vertical u-gap-4 u-padding-16">
                     <h4 class="modal-title heading-level-5">Borrar cuenta</h4>
                     <p class="text u-small">
                         Esta acción es irreversible. Al borrar tu cuenta
@@ -84,7 +85,7 @@
                     </p>
                 </header>
 
-                <div class="modal-body">
+                <div class="modal-body u-flex u-flex-vertical u-gap-16 u-padding-8">
                     <form id="delete-account-form" class="form">
                         <ul class="form-list">
                             <li class="form-item">
@@ -103,7 +104,7 @@
                         </ul>
                     </form>
 
-                    <div class="actions">
+                    <div class="u-flex u-cross-center u-gap-12">
                         <button
                             type="submit"
                             class="button"
@@ -125,6 +126,7 @@
             </dialog>
         </main>
 
+        <moaqz-toaster duration="8000" dismissable></moaqz-toaster>
         <script type="module" src="./js/edit-profile.js"></script>
     </body>
 </html>

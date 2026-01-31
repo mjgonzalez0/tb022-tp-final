@@ -11,6 +11,8 @@ import {
 import { $fetch } from "./fetch.js";
 import { getIdFromParam } from "./params.js";
 
+import { toast } from "https://unpkg.com/@moaqzdev/toast/utils";
+
 await initializePage({
   requiresAuth: true,
   onReady: async (user) => {
@@ -35,8 +37,8 @@ await initializePage({
       editorParent: document.querySelector("#editor"),
     };
 
-    title.value = snippet.title;
-    runtime.value = snippet.runtime;
+    fields.title.value = snippet.title;
+    fields.runtime.value = snippet.runtime;
     fields.visibility.checked = snippet.is_public;
 
     await initializeCodeEditor(fields.editorParent);
@@ -62,7 +64,10 @@ await initializePage({
       });
 
       if (hasError) {
-        console.log("HUBO UN ERROR");
+        toast.error({
+          message: "No se pudo actualizar el snippet",
+          description: "Verifica que todos los campos sean válidos.",
+        });
         return;
       }
 

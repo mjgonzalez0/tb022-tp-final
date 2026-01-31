@@ -21,7 +21,7 @@ El boceto inicial de la aplicación. El desarrollo final difirió en algunos asp
 
 **Página de inicio**
 
-Todos los snippets públicos se listan aquí y pueden ordenarse según su fecha de creación.
+Todos los snippets públicos se muestran aquí y pueden ordenarse según su fecha de creación.
 
 ![Inicio](./assets/home.webp)
 

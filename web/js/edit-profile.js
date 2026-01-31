@@ -3,6 +3,8 @@ import { initializeHeader } from "./header.js";
 import { redirect, ROUTES } from "./routes.js";
 import { $fetch } from "./fetch.js";
 
+import { toast } from "https://unpkg.com/@moaqzdev/toast/utils";
+
 await initializePage({
   requiresAuth: true,
   onReady: async (user) => {
@@ -57,7 +59,10 @@ await initializePage({
 
       if (hasError) {
         dialog.close();
-        console.log("No se pudo borrar la cuenta.");
+        toast.error({
+          message: "Error al eliminar cuenta",
+          description: "No se pudo completar la operación. Intenta nuevamente.",
+        });
         accountDeletionForm.reset();
         return;
       }
