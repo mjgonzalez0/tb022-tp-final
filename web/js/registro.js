@@ -12,15 +12,13 @@ const mensajesCorreo = document.getElementById("textCorreo");
 const mensajesUser = document.getElementById("textUsuario");
 const mensajePassword1 = document.getElementById("mensajeContraseña");
 const mensajePassword2  = document.getElementById("mensajeRepContraseña");
-const mensajeButtonRegister = document.getElementById("mensajeBotonRegistro")
+const mensajeButtonRegister = document.getElementById("mensajeBotonRegistro");
 
+const bottonRegister = document.getElementById("botonRegistro");
 const botonAtras = document.getElementById('boton-atras');
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
-botonAtras.addEventListener('click', () => {
-    redirect(ROUTES.HOME); 
-});
 
 inputCorreo.addEventListener("input",() => {
 
@@ -38,34 +36,42 @@ inputUser.addEventListener("input", () =>{
         mensajesUser.textContent = "";      
 }})
 
-
 inputPassword.addEventListener("input",() => {
     if (inputPassword.value.length < 8) {
         mensajePassword1.textContent = "La contraseña debe tener al menos 8 caracteres";
     } else {
         mensajePassword1.textContent = "";
         
-}})
-
+    }})
+    
+    
 inputConfirmPassword.addEventListener("input",() => {
     if (inputConfirmPassword.value !== inputPassword.value) {
         mensajePassword2.textContent = "Las contraseñas no coinciden";
     } else {
         mensajePassword2.textContent = "";
-}})
+    }})
+
+bottonRegister.addEventListener('click', () => {
+    redirect(ROUTES.LOGIN); 
+});
+
+botonAtras.addEventListener('click', () => {
+    redirect(ROUTES.HOME); 
+});
 
 formulario.addEventListener("submit", async(evento) => {
-
+    
     evento.preventDefault();
-
+    
     mensajesUser.textContent = "";
     mensajesCorreo.textContent = "";
     mensajePassword1.textContent = "";
     mensajePassword2.textContent = "";
-    
+            
     
     if(!formulario.checkValidity() ){
-        //formulario.reportValidity();
+        formulario.reportValidity();
         if (inputUser.value === ""){
             mensajesUser.textContent = "Es obligatorio colocar un usuario"
         }
