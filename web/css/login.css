@@ -1,8 +1,11 @@
 :root {
-    --color-fondo-dos: rgba(191, 175, 175, 0.95);
+    --color-fondo-dos: rgba(219, 209, 209, 0.95);
     --color-letra-error: red ;
 } 
+body {
+    background-color: var(--color-fondo-dos) !important;
 
+}
 #logos {
     position: fixed;
     bottom: 0;          
