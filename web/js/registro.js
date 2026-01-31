@@ -65,7 +65,7 @@ formulario.addEventListener("submit", async(evento) => {
     
     
     if(!formulario.checkValidity() ){
-        //formulario.reportValidity();
+        formulario.reportValidity();
         if (inputUser.value === ""){
             mensajesUser.textContent = "Es obligatorio colocar un usuario"
         }
