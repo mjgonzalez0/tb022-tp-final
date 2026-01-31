@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
+    <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink-icons" />
+<<<<<<< HEAD
+    <link rel="stylesheet" href="./css/registro.css">
+=======
+    <link rel="stylesheet" href="registro.css">
+>>>>>>> 037aa5d616a308854589ae4bbad497fb0e5438a0
+</head>
+<body>
+
+    <article class="card">
+        <form id="formulario"  class="form u-width-full-line u-max-width-500" novalidate>
+            <h3 class="heading-level-3 u-text-center" >Crear Cuenta</h3>
+            <ul class="form-list">
+                <li class="form-item">
+                    <label class="label" for="correo">Correo electrónico</label>
+                    <div  class="input-text-wrapper">
+                        <input 
+                        id="correo"
+                        type="email" 
+                        class="input-text" 
+                        name="correo" 
+                        maxlength="255"
+                        placeholder="Ejemplo@gmail.com" 
+                        required>
+                        <p id="textCorreo" class="MensajeError"></p>
+                    </div>
+                </li>
+                <li class="form-item">
+<<<<<<< HEAD
+                    <label class="label" for="usuario">Usuario</label>
+=======
+                    <label class="label" for="correo">Usuario</label>
+>>>>>>> 037aa5d616a308854589ae4bbad497fb0e5438a0
+                    <div  class="input-text-wrapper">
+                        <input 
+                        id="usuario"
+                        type="text" 
+                        class="input-text" 
+                        name="nombre" 
+                        minlength="3"
+                        maxlength="60"
+                        placeholder="Nombre de usuario " 
+                        required>
+                        <p id="textUsuario" class="MensajeError"></p>
+                    </div>
+                </li>
+                <li class="form-item ">
+                    <label class="label" for="contraseña">Contraseña</label>
+                    <div  class="input-text-wrapper">
+                        <input 
+                        type="password" 
+                        class="input-text" 
+                        name="contraseña" 
+                        id="contraseña"
+                        minlength="8"
+                        placeholder="Debe contener más de 8 carácteres" 
+                        required>
+                        <p id="mensajeContraseña" class="MensajeError"></p>
+                    </div>
+                </li>
+                <li class="form-item ">
+                    <label class="label" for="confirmarcontraseña">Confirmación de contraseña</label>
+                    <div  class="input-text-wrapper">
+                        <input 
+                        type="password" 
+                        class="input-text" 
+                        name="confirmarcontraseña" 
+                        id="confirmarcontraseña"
+                        minlength="8"
+                        placeholder="Repetir Contraseña" 
+                        required>
+                        <p id="mensajeRepContraseña" class="MensajeError"></p>
+                    </div>
+                </li>
+            </ul>
+            <br>
+            <div class="u-flex u-main-center u-gap-12" >
+                <button class="button" id="botonRegistro" type="submit">Registrarse</button>
+            </div>
+            <div class="u-flex u-main-center u-gap-12">
+                <a href="login.html" class="button is-text"">¿Ya tienes una cuenta?</a>
+            </div>
+            <p id="mensajeBotonRegistro" class="MensajeError">
+                
+            </p>  
+        </form>
+    </article>
+    <div>
+        <button id="boton-atras" class="button is-secondary" type="button" aria-label="Add new item">
+            <span class="icon-cheveron-left" aria-hidden="true"></span>
+            <span class="text">Atrás</span>
+        </button>
+        <!-- <button id="boton_cambio_de_tema" class="icon-plus" aria-label="Add new item">
+            <span class="button is-only-icon" aria-hidden="true"></span>
+            <span class="text"></span>
+        </button> -->
+    </div> 
+
+    <script type="module" src="./js/registro.js"> </script>
+</body>
+
+</html>

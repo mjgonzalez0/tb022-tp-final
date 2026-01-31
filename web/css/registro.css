@@ -1,0 +1,41 @@
+
+:root {
+    --color-fondo-dos: rgba(191, 175, 175, 0.95);
+    --color-letra-error: red ;
+}
+
+body {
+    background-image:url(fondo.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+}
+#boton-atras {
+    position: absolute;   
+    top: 0;               
+    left: 0;
+    margin: 10px;
+    background: var(--color-fondo-dos);
+    padding: 10px;
+    border-radius: 8px;
+    padding: 0px 7px 0px 0px;
+    color: #444444
+}
+
+#mensajeBotonRegistro {
+    text-align: center;
+}
+p.MensajeError {
+    color: var(--color-letra-error);
+    display: inline;
+}
+.card {
+    width: 60%;
+    max-width: 450px;
+    background-color: var(--color-fondo-dos) !important;
+}
