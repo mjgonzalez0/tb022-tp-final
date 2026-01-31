@@ -1,7 +1,5 @@
-import { ROUTES } from "./routes.js";
+import { ROUTES, redirect } from "./routes.js";
 import { deleteAccessToken } from "./token.js";
-
-
 
 export function initializeHeader(user) {
   const header = document.createElement("header");
@@ -33,8 +31,12 @@ export function initializeHeader(user) {
   }
 
   const logoutBtn = document.querySelector("#logout-btn");
-  logoutBtn.addEventListener("click", async () => {
-    deleteAccessToken();
-    window.location = ROUTES.LOGIN;
-  }, { once: true });
+  logoutBtn.addEventListener(
+    "click",
+    async () => {
+      deleteAccessToken();
+      redirect(ROUTES.LOGIN);
+    },
+    { once: true },
+  );
 }
