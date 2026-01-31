@@ -1,0 +1,53 @@
+:root {
+    --color-fondo-dos: rgba(219, 209, 209, 0.95);
+    --color-letra-error: red ;
+} 
+body {
+    background-color: var(--color-fondo-dos) !important;
+
+}
+#logos {
+    position: fixed;
+    bottom: 0;          
+    left: 0;            
+    width: 100%;        
+    display: flex;      
+    justify-content: center; 
+    gap: 20px;          
+    background: #f9f9f9;
+}
+#sticker {
+    font-size: 80px;
+}
+
+.frace {
+    position: absolute;       
+    top: 50%;               
+    left: 35%;                
+    transform: translate(-50%, -50%); 
+    width: 600px;            
+    padding: 20px;
+    border-radius: 8px;
+}
+.frace .titulo h1 {
+    font-size: 58px;
+}
+.frace .parrafo {
+    height: 10%;
+    width: 100%; 
+    
+}
+.card {
+    position: absolute;       
+    top: 50%;                 
+    left: 75%;                
+    transform: translate(-50%, -50%);             
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    width: 25%; 
+    
+}
+

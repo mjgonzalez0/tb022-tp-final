@@ -1,17 +1,23 @@
+import { redirect, ROUTES } from "./routes.js";
+import { API_URL } from "./constants.js";
+
 const formulario = document.getElementById("formulario");
 
 const inputUser = document.getElementById("usuario");
-const inputCorreo = document.getElementById("correo");
 const inputPassword = document.getElementById("contraseña");
-const inputConfirmPassword = document.getElementById("confirmarcontraseña");
 
-const mensajesCorreo = document.getElementById("textCorreo");
-const mensajesUser = document.getElementById("textUsuario");
-const mensajePassword1 = document.getElementById("mensajeContraseña");
-const mensajePassword2  = document.getElementById("mensajeRepContraseña");
-const mensajeButtonRegister = document.getElementById("mensajeBotonRegistro")
+const mensajesUser = document.getElementById("mensajeUsuario");
+const mensajePassword = document.getElementById("mensajeContraseña");
+
+const mensajeButtonLogin = document.getElementById("botonIniciarSesion")
+
+const botonCrearNuevaCuenta = document.getElementById('crea-cuenta');
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
+
+botonCrearNuevaCuenta.addEventListener('click', () => {
+    redirect(ROUTES.REGISTER); 
+});
 
 inputCorreo.addEventListener("input",() => {
 
@@ -83,7 +89,7 @@ formulario.addEventListener("submit", async(evento) => {
         };
         
         try {
-            const respuesta = await fetch("/registro", {
+            const respuesta = await fetch( `${API_URL}/users`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datos),
@@ -93,6 +99,7 @@ formulario.addEventListener("submit", async(evento) => {
             if (respuesta.ok) {
                 
                 alert("Cuenta creada con éxito");
+                redirect(ROUTES.LOGIN);
                 formulario.reset();
                 
             }else {
@@ -112,4 +119,3 @@ formulario.addEventListener("submit", async(evento) => {
             mensajeButtonRegister.textContent = "Error de conexión con el servidor";
     }
 });
-
