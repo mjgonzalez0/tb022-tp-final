@@ -4,22 +4,19 @@ import { API_URL } from "./constants.js";
 const formulario = document.getElementById("formulario");
 
 const inputUser = document.getElementById("usuario");
-const inputCorreo = document.getElementById("correo");
 const inputPassword = document.getElementById("contraseña");
-const inputConfirmPassword = document.getElementById("confirmarcontraseña");
 
-const mensajesCorreo = document.getElementById("textCorreo");
-const mensajesUser = document.getElementById("textUsuario");
-const mensajePassword1 = document.getElementById("mensajeContraseña");
-const mensajePassword2  = document.getElementById("mensajeRepContraseña");
-const mensajeButtonRegister = document.getElementById("mensajeBotonRegistro")
+const mensajesUser = document.getElementById("mensajeUsuario");
+const mensajePassword = document.getElementById("mensajeContraseña");
 
-const botonAtras = document.getElementById('boton-atras');
+const mensajeButtonLogin = document.getElementById("botonIniciarSesion")
+
+const botonCrearNuevaCuenta = document.getElementById('crea-cuenta');
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
-botonAtras.addEventListener('click', () => {
-    redirect(ROUTES.HOME); 
+botonCrearNuevaCuenta.addEventListener('click', () => {
+    redirect(ROUTES.REGISTER); 
 });
 
 inputCorreo.addEventListener("input",() => {

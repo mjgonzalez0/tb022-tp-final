@@ -1,5 +1,5 @@
 export const ROUTES = {
-  LOGIN: "/login.html",
+  LOGIN: "/iniciar-sesion.html",
   SNIPPET: (id) => `/snippets.html?id=${encodeURIComponent(id)}`,
   EDIT_SNIPPET: (id) => `/editar-snippet.html?id=${encodeURIComponent(id)}`,
   HOME: "index.html",
