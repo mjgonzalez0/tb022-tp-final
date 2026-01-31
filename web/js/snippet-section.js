@@ -13,8 +13,8 @@ export function renderSnippets(snippets, target = "#snippets-list") {
     item.innerHTML = /* html */ `
       <a href="${href}" class="snippet">
         <h2 class="heading-level-6">${snippet.title}</h2>
-        <ul class="info">
-            <li>
+        <ul class="info u-flex u-cross-center u-flex-wrap u-gap-8">
+            <li class="u-flex u-cross-center u-gap-4">
                <span class="icon-user" aria-hidden="true"></span>
                <span class="text">
                 Creado por <span>${snippet.username}</span>
