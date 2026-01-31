@@ -5,6 +5,7 @@
 }
 
 body {
+    background-image:url(fondo.jpg);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,7 +14,6 @@ body {
     background-position: center; 
     background-repeat: no-repeat; 
     background-attachment: fixed;
-    background-image:url(fondo.jpg);
 }
 #boton-atras {
     position: absolute;   
@@ -26,6 +26,7 @@ body {
     padding: 0px 7px 0px 0px;
     color: #444444
 }
+
 #mensajeBotonRegistro {
     text-align: center;
 }

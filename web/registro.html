@@ -7,7 +7,7 @@
     <title>Registro de Usuario</title>
     <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
     <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink-icons" />
-    <link rel="stylesheet" href="registro.css">
+    <link rel="stylesheet" href="./css/registro.css">
 </head>
 <body>
 
@@ -30,7 +30,7 @@
                     </div>
                 </li>
                 <li class="form-item">
-                    <label class="label" for="correo">Usuario</label>
+                    <label class="label" for="usuario">Usuario</label>
                     <div  class="input-text-wrapper">
                         <input 
                         id="usuario"
@@ -59,7 +59,7 @@
                     </div>
                 </li>
                 <li class="form-item ">
-                    <label id="confirmar" class="label" for="confirmar">Confirmación de contraseña</label>
+                    <label class="label" for="confirmarcontraseña">Confirmación de contraseña</label>
                     <div  class="input-text-wrapper">
                         <input 
                         type="password" 
@@ -73,12 +73,12 @@
                     </div>
                 </li>
             </ul>
-            <button class="button is-text" type="button" >
-                <span class="body-text-2 u-underline" >¿Ya tienes una cuenta?</span>
-            </button>
-            <div class="u-flex u-main-end u-gap-12" >
-                <button class="button is-secondary" type="button">Cancel</button>
-                <button class="button" type="submit">Registrarse</button>
+            <br>
+            <div class="u-flex u-main-center u-gap-12" >
+                <button class="button" id="botonRegistro" type="submit">Registrarse</button>
+            </div>
+            <div class="u-flex u-main-center u-gap-12">
+                <a href="login.html" class="button is-text"">¿Ya tienes una cuenta?</a>
             </div>
             <p id="mensajeBotonRegistro" class="MensajeError">
                 
@@ -87,8 +87,8 @@
     </article>
     <div>
         <button id="boton-atras" class="button is-secondary" type="button" aria-label="Add new item">
-            <span class="icon-cheveron-left" aria-hidden="true"></span>
-            <span class="text">Atrás</span>
+        <span class="icon-cheveron-left" aria-hidden="true"></span>
+        <span class="text">Atrás</span>
         </button>
         <!-- <button id="boton_cambio_de_tema" class="icon-plus" aria-label="Add new item">
             <span class="button is-only-icon" aria-hidden="true"></span>
@@ -96,7 +96,7 @@
         </button> -->
     </div> 
 
-    <script src="registro.js"> </script>
+    <script type="module" src="./js/registro.js"> </script>
 </body>
 
 </html>

@@ -1,3 +1,6 @@
+import { redirect, ROUTES } from "./routes.js";
+import { API_URL } from "./constants.js";
+
 const formulario = document.getElementById("formulario");
 
 const inputUser = document.getElementById("usuario");
@@ -11,7 +14,13 @@ const mensajePassword1 = document.getElementById("mensajeContraseña");
 const mensajePassword2  = document.getElementById("mensajeRepContraseña");
 const mensajeButtonRegister = document.getElementById("mensajeBotonRegistro")
 
+const botonAtras = document.getElementById('boton-atras');
+
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
+
+botonAtras.addEventListener('click', () => {
+    redirect(ROUTES.HOME); 
+});
 
 inputCorreo.addEventListener("input",() => {
 
@@ -56,7 +65,7 @@ formulario.addEventListener("submit", async(evento) => {
     
     
     if(!formulario.checkValidity() ){
-        formulario.reportValidity();
+        //formulario.reportValidity();
         if (inputUser.value === ""){
             mensajesUser.textContent = "Es obligatorio colocar un usuario"
         }
@@ -83,7 +92,7 @@ formulario.addEventListener("submit", async(evento) => {
         };
         
         try {
-            const respuesta = await fetch("/registro", {
+            const respuesta = await fetch( `${API_URL}/users`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datos),
@@ -93,6 +102,7 @@ formulario.addEventListener("submit", async(evento) => {
             if (respuesta.ok) {
                 
                 alert("Cuenta creada con éxito");
+                redirect(ROUTES.LOGIN);
                 formulario.reset();
                 
             }else {
