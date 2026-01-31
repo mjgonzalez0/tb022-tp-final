@@ -49,32 +49,37 @@ await initializePage({
       await renderComments(snippetId, commentsList, user);
     });
 
-    const titleEl = document.querySelector("#snippet_title");
-    const authorEl = document.querySelector("#snippet_author");
-    const dateEl = document.querySelector("#snippet_creation_date");
-    const runtimeEl = document.querySelector("#snippet_runtime");
-    const actionsEl = document.querySelector("#actions");
-    const codeEl = document.querySelector("#snippet_code");
     const editBtnEl = document.querySelector("#edit-snippet");
     const userProfileLink = document.querySelector("#user_profile_link");
 
-    titleEl.innerHTML = snippet.title;
-    authorEl.innerHTML = snippet.username;
-    dateEl.innerHTML = new Intl.DateTimeFormat("es", {
+    const elements = {
+      title: document.querySelector("#snippet_title"),
+      author: document.querySelector("#snippet_author"),
+      date: document.querySelector("#snippet_creation_date"),
+      runtime: document.querySelector("#snippet_runtime"),
+      actions: document.querySelector("#actions"),
+      code: document.querySelector("#snippet_code"),
+    };
+
+    const formattedDate = new Intl.DateTimeFormat("es", {
       dateStyle: "full",
     }).format(new Date(snippet.created_at));
-    runtimeEl.innerHTML = snippet.runtime;
-    
-    userProfileLink.setAttribute("href", ROUTES.USER_PROFILE(snippet.username))
+
+    elements.title.textContent = snippet.title;
+    elements.author.textContent = snippet.username;
+    elements.date.textContent = formattedDate;
+    elements.runtime.textContent = snippet.runtime;
+
+    userProfileLink.setAttribute("href", ROUTES.USER_PROFILE(snippet.username));
 
     if (user?.id !== snippet.user_id) {
-      actionsEl.remove();
+      elements.actions.remove();
     } else {
       const route = ROUTES.EDIT_SNIPPET(snippetId);
       editBtnEl.setAttribute("href", route);
     }
 
-    codeEl.innerHTML = await codeToHtml(snippet.code, {
+    elements.code.innerHTML = await codeToHtml(snippet.code, {
       lang: snippet.runtime,
       theme: "kanagawa-dragon",
     });

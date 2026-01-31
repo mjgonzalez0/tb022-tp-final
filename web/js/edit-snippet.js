@@ -35,8 +35,8 @@ await initializePage({
       editorParent: document.querySelector("#editor"),
     };
 
-    title.value = snippet.title;
-    runtime.value = snippet.runtime;
+    fields.title.value = snippet.title;
+    fields.runtime.value = snippet.runtime;
     fields.visibility.checked = snippet.is_public;
 
     await initializeCodeEditor(fields.editorParent);
