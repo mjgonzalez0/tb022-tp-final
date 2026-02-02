@@ -1,4 +1,4 @@
- import { Router } from "express";
+import { Router } from "express";
 import { hash, verify } from "@node-rs/argon2";
 import jwt from "jsonwebtoken";
 

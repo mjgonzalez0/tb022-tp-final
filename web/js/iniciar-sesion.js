@@ -7,14 +7,27 @@ const formulario = document.getElementById("formulario");
 const inputCorreo = document.getElementById("correo");
 const inputPassword = document.getElementById("contraseña");
 
-const mensajesCorreo = document.getElementById("mensajeUsuario");
+const mensajesCorreo = document.getElementById("mensajeCorreo");
 const mensajesPassword = document.getElementById("mensajeContraseña");
 
 const mensajeButtonLogin = document.getElementById("mensajeIniciarSesion")
 
 const botonCrearNuevaCuenta = document.getElementById('crea-cuenta');
 
-const buttonlogin = document.getElementById("botonIniciarSesion")
+const buttonlogin = document.getElementById("botonIniciarSesion");
+
+const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
+
+
+inputCorreo.addEventListener("input",() => {
+
+    if (inputCorreo.value.length > 255 || !EMAIL_REGEX.test(inputCorreo.value)) {
+        mensajesCorreo.textContent = "La estructura del correo es invalida"
+    }else {
+        mensajesCorreo.textContent = ""
+
+    }
+})
 
 botonCrearNuevaCuenta.addEventListener("click", () => {
 
@@ -22,27 +35,21 @@ botonCrearNuevaCuenta.addEventListener("click", () => {
 
 } )
 
-inputCorreo.addEventListener("input", () =>{
-    if(inputCorreo.value === "" ){
-        mensajesCorreo.textContent = "Es obligatorio colocar un correo";
-    } else {
-        mensajesCorreo.textContent = "";      
-}})
-
-
-inputPassword.addEventListener("keydown", (event) => {  
+inputPassword.addEventListener("keyup", (event) => {  
     if (event.getModifierState("CapsLock")) {
         mensajesPassword.textContent = "Mayusculas activadas";
     } else {
         mensajesPassword.textContent = "";   
-}})
-
+    }})
+    
     formulario.addEventListener("submit", async(evento) => {
 
     evento.preventDefault();
 
     mensajesCorreo.textContent = "";
     mensajesPassword.textContent = "";
+
+
     
     if(!formulario.checkValidity() ){
         formulario.reportValidity();
@@ -82,7 +89,7 @@ inputPassword.addEventListener("keydown", (event) => {
             
         }else {
             const errorData = await respuesta.json();
-            if (respuesta.status === 409) {
+            if (respuesta.status === 400) {
                 
                 mensajesCorreo.textContent = "";
         
