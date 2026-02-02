@@ -5,7 +5,8 @@ create table
     username text unique not null,
     email text unique not null,
     password text not null,
-    bio text default '',
+    bio text not null default '',
+    location text not null default '',
     created_at timestamptz not null default now (),
     updated_at timestamptz default null
   );
@@ -35,8 +36,6 @@ create table
     created_at timestamptz not null default now (),
     updated_at timestamptz default null
   );
-
-ALTER TABLE users ADD avatar TEXT NOT NULL DEFAULT '';
 
 insert into users
     (id, username, email, password, bio)
