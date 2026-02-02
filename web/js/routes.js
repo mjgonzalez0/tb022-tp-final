@@ -1,6 +1,6 @@
 export const ROUTES = {
-  LOGIN: "/iniciar-sesion.html",
-  SIGNIN : "/registro.html",
+  LOGIN: "./iniciar-sesion.html",
+  SIGNIN : "./registro.html",
   SNIPPET: (id) => `/snippets.html?id=${encodeURIComponent(id)}`,
   EDIT_SNIPPET: (id) => `/editar-snippet.html?id=${encodeURIComponent(id)}`,
   HOME: "index.html",

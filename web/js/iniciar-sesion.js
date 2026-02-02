@@ -12,7 +12,7 @@ const mensajesPassword = document.getElementById("mensajeContraseña");
 
 const mensajeButtonLogin = document.getElementById("mensajeIniciarSesion")
 
-const botonCrearNuevaCuenta = document.getElementById('crea-cuenta');
+const botonCrearNuevaCuenta = document.getElementById("crea-cuenta");
 
 const buttonlogin = document.getElementById("botonIniciarSesion");
 
@@ -79,13 +79,11 @@ inputPassword.addEventListener("keyup", (event) => {
     
     
         if (respuesta.ok) {
-          mensajeButtonLogin.textContent = respuesta.messaje;
-          
-          const { access_token } = await respuesta.json();
-          saveAccessToken(access_token);
-          
-          redirect(ROUTES.HOME);
-          formulario.reset();
+            const { access_token } = await respuesta.json();
+            saveAccessToken(access_token);
+            
+            redirect(ROUTES.HOME);
+            formulario.reset();
             
         }else {
             const errorData = await respuesta.json();
