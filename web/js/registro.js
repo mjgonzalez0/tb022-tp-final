@@ -14,7 +14,8 @@ const mensajePassword1 = document.getElementById("mensajeContraseña");
 const mensajePassword2  = document.getElementById("mensajeRepContraseña");
 const mensajeButtonRegister = document.getElementById("mensajeBotonRegistro");
 
-const bottonRegister = document.getElementById("botonRegistro");
+const botonRegister = document.getElementById("botonRegistro");
+const botonLogin = document.getElementById("botonLogin"); 
 const botonAtras = document.getElementById('boton-atras');
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
@@ -52,8 +53,9 @@ inputConfirmPassword.addEventListener("input",() => {
         mensajePassword2.textContent = "";
     }})
 
-bottonRegister.addEventListener('click', () => {
-    redirect(ROUTES.LOGIN); 
+botonLogin.addEventListener('click', () => {
+
+    redirect( ROUTES.LOGIN ); 
 });
 
 botonAtras.addEventListener('click', () => {

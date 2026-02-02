@@ -34,7 +34,6 @@ botonCrearNuevaCuenta.addEventListener("click", () => {
 
 } )
 
-
 inputPassword.addEventListener("keydown", (event) => {  
     if (event.getModifierState("CapsLock")) {
         mensajesPassword.textContent = "Mayusculas activadas";
