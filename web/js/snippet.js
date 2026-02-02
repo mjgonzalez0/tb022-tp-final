@@ -57,6 +57,11 @@ await initializePage({
       await renderComments(snippetId, commentsList, user);
     });
 
+    if (!Object.keys(user).length) {
+      const submitBtn = commentForm.querySelector("button");
+      submitBtn.setAttribute("disabled", true);
+    }
+
     const editBtnEl = document.querySelector("#edit-snippet");
     const userProfileLink = document.querySelector("#user_profile_link");
 

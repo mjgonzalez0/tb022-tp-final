@@ -1,5 +1,6 @@
 import { redirect, ROUTES } from "./routes.js";
 import { API_URL } from "./constants.js";
+import { saveAccessToken } from "./token.js";
 
 const formulario = document.getElementById("formulario");
 
@@ -78,10 +79,13 @@ inputPassword.addEventListener("keyup", (event) => {
     
     
         if (respuesta.ok) {
-            const data = await respuesta.json();
-            //alert 
-            redirect(ROUTES.HOME);
-            formulario.reset();
+          mensajeButtonLogin.textContent = respuesta.messaje;
+          
+          const { access_token } = await respuesta.json();
+          saveAccessToken(access_token);
+          
+          redirect(ROUTES.HOME);
+          formulario.reset();
             
         }else {
             const errorData = await respuesta.json();

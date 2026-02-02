@@ -2,7 +2,7 @@ import { getCurrentUser } from "./auth.js";
 import { redirect, ROUTES } from "./routes.js";
 
 // Inicializa la página siguiendo este flujo:
-// 
+//
 // 1. Obtener el usuario actual (si existe)
 // 2. Si la página requiere autenticación y no hay usuario → redirigir al login
 // 3. Si la página es solo para invitados y hay usuario → redirigir al inicio
@@ -16,7 +16,7 @@ export async function initializePage({
   const loader = document.querySelector("#loading-state");
 
   const user = await getCurrentUser();
-  if (requiresAuth && !user) {
+  if (requiresAuth && !Object.keys(user).length) {
     redirect(ROUTES.LOGIN);
     return;
   }
