@@ -1,5 +1,6 @@
 import { redirect, ROUTES } from "./routes.js";
 import { API_URL } from "./constants.js";
+import { toast } from "https://unpkg.com/@moaqzdev/toast/utils";
 
 const formulario = document.getElementById("formulario");
 
@@ -108,27 +109,31 @@ formulario.addEventListener("submit", async(evento) => {
         
         
             const resData = await respuesta.json();
-            if (respuesta.ok) {
-                    
-                    alert("Cuenta creada con éxito");
-                    redirect(ROUTES.LOGIN);
-                    formulario.reset();
-                
+          if (respuesta.ok) {
+              formulario.reset();
+                    redirect(ROUTES.LOGIN);                
             }else if (respuesta.status === 409) {
                 
-                    
+              toast.error({
+                  title: "Usuario o correo ya registrado",
+                  description: "Intenta con un nombre de usuario o correo diferente.",
+                });
                     mensajesUser.textContent = "";
                     mensajesCorreo.textContent = "";
             
                     mensajesUser.textContent = resData.error ;
-                    mensajesCorreo.textContent = resData.error ;
-                    return
-                
-            }else {
-                alert("Error: " + resData.error);
-                return
+                    mensajesCorreo.textContent = resData.error ;         
+          } else {
+            toast.error({
+               title: "Error al crear cuenta",
+               description: "Ocurrió un problema inesperado.",
+             });
             }
         } catch (error) {
+          toast.error({
+             title: "Error al crear cuenta",
+             description: "Ocurrió un problema inesperado.",
+           });
             mensajeButtonRegister.textContent = "Error de conexión con el servidor";
             return
     }
