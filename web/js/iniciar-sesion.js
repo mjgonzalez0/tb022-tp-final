@@ -34,13 +34,13 @@ botonCrearNuevaCuenta.addEventListener("click", () => {
 
 } )
 
-inputPassword.addEventListener("keydown", (event) => {  
+inputPassword.addEventListener("keyup", (event) => {  
     if (event.getModifierState("CapsLock")) {
         mensajesPassword.textContent = "Mayusculas activadas";
     } else {
         mensajesPassword.textContent = "";   
-}})
-
+    }})
+    
     formulario.addEventListener("submit", async(evento) => {
 
     evento.preventDefault();
@@ -78,13 +78,14 @@ inputPassword.addEventListener("keydown", (event) => {
     
     
         if (respuesta.ok) {
-            mensajeButtonLogin.textContent = respuesta.messaje;
+            const data = await respuesta.json();
+            //alert 
             redirect(ROUTES.HOME);
             formulario.reset();
             
         }else {
             const errorData = await respuesta.json();
-            if (respuesta.status === 409) {
+            if (respuesta.status === 400) {
                 
                 mensajesCorreo.textContent = "";
         
