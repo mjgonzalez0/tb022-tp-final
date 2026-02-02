@@ -28,6 +28,10 @@ const LANGUAGES_PACKAGES = {
   markdown: {
     name: "@codemirror/lang-markdown",
     function: "markdown",
+  },
+  yaml: {
+    name: "@codemirror/lang-yaml",
+    function: "yaml",
   }
 };
 
