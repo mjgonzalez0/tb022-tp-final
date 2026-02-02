@@ -6,27 +6,33 @@ const formulario = document.getElementById("formulario");
 const inputCorreo = document.getElementById("correo");
 const inputPassword = document.getElementById("contraseña");
 
-const mensajesCorreo = document.getElementById("mensajeUsuario");
+const mensajesCorreo = document.getElementById("mensajeCorreo");
 const mensajesPassword = document.getElementById("mensajeContraseña");
 
 const mensajeButtonLogin = document.getElementById("mensajeIniciarSesion")
 
 const botonCrearNuevaCuenta = document.getElementById('crea-cuenta');
 
-const buttonlogin = document.getElementById("botonIniciarSesion")
+const buttonlogin = document.getElementById("botonIniciarSesion");
+
+const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
+
+
+inputCorreo.addEventListener("input",() => {
+
+    if (inputCorreo.value.length > 255 || !EMAIL_REGEX.test(inputCorreo.value)) {
+        mensajesCorreo.textContent = "La estructura del correo es invalida"
+    }else {
+        mensajesCorreo.textContent = ""
+
+    }
+})
 
 botonCrearNuevaCuenta.addEventListener("click", () => {
 
     redirect( ROUTES.SIGNIN );
 
 } )
-
-inputCorreo.addEventListener("input", () =>{
-    if(inputCorreo.value === "" ){
-        mensajesCorreo.textContent = "Es obligatorio colocar un correo";
-    } else {
-        mensajesCorreo.textContent = "";      
-}})
 
 
 inputPassword.addEventListener("keydown", (event) => {  
@@ -42,6 +48,8 @@ inputPassword.addEventListener("keydown", (event) => {
 
     mensajesCorreo.textContent = "";
     mensajesPassword.textContent = "";
+
+
     
     if(!formulario.checkValidity() ){
         formulario.reportValidity();
