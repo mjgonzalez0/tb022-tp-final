@@ -75,7 +75,6 @@ inputPassword.addEventListener("keydown", (event) => {
           mensajeButtonLogin.textContent = respuesta.messaje;
           
           const { access_token } = await respuesta.json();
-          alert(access_token)
           saveAccessToken(access_token);
           
           redirect(ROUTES.HOME);
