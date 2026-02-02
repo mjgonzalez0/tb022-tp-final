@@ -107,27 +107,30 @@ formulario.addEventListener("submit", async(evento) => {
             });
         
         
+            const resData = await respuesta.json();
             if (respuesta.ok) {
+                    
+                    alert("Cuenta creada con éxito");
+                    redirect(ROUTES.LOGIN);
+                    formulario.reset();
                 
-                alert("Cuenta creada con éxito");
-                redirect(ROUTES.LOGIN);
-                formulario.reset();
+            }else if (respuesta.status === 409) {
                 
-            }else {
-                const errorData = await respuesta.json();
-                if (respuesta.status === 409) {
                     
                     mensajesUser.textContent = "";
                     mensajesCorreo.textContent = "";
             
-                    mensajesUser.textContent = errorData.error ;
-                    mensajesCorreo.textContent = errorData.error ;
+                    mensajesUser.textContent = resData.error ;
+                    mensajesCorreo.textContent = resData.error ;
+                    return
                 
-                }else {
-                alert("Error: " + errorData.error);
-                }}
+            }else {
+                alert("Error: " + resData.error);
+                return
+            }
         } catch (error) {
             mensajeButtonRegister.textContent = "Error de conexión con el servidor";
+            return
     }
 });
 
