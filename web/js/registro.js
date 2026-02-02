@@ -1,5 +1,6 @@
 import { redirect, ROUTES } from "./routes.js";
 import { API_URL } from "./constants.js";
+import { toast } from "https://unpkg.com/@moaqzdev/toast/utils";
 
 const formulario = document.getElementById("formulario");
 
@@ -107,27 +108,34 @@ formulario.addEventListener("submit", async(evento) => {
             });
         
         
-            if (respuesta.ok) {
+            const resData = await respuesta.json();
+          if (respuesta.ok) {
+              formulario.reset();
+                    redirect(ROUTES.LOGIN);                
+            }else if (respuesta.status === 409) {
                 
-                alert("Cuenta creada con éxito");
-                redirect(ROUTES.LOGIN);
-                formulario.reset();
-                
-            }else {
-                const errorData = await respuesta.json();
-                if (respuesta.status === 409) {
-                    
+              toast.error({
+                  title: "Usuario o correo ya registrado",
+                  description: "Intenta con un nombre de usuario o correo diferente.",
+                });
                     mensajesUser.textContent = "";
                     mensajesCorreo.textContent = "";
             
-                    mensajesUser.textContent = errorData.error ;
-                    mensajesCorreo.textContent = errorData.error ;
-                
-                }else {
-                alert("Error: " + errorData.error);
-                }}
+                    mensajesUser.textContent = resData.error ;
+                    mensajesCorreo.textContent = resData.error ;         
+          } else {
+            toast.error({
+               title: "Error al crear cuenta",
+               description: "Ocurrió un problema inesperado.",
+             });
+            }
         } catch (error) {
+          toast.error({
+             title: "Error al crear cuenta",
+             description: "Ocurrió un problema inesperado.",
+           });
             mensajeButtonRegister.textContent = "Error de conexión con el servidor";
+            return
     }
 });
 

@@ -79,21 +79,21 @@ inputPassword.addEventListener("keyup", (event) => {
     
     
         if (respuesta.ok) {
-          mensajeButtonLogin.textContent = respuesta.messaje;
-          
-          const { access_token } = await respuesta.json();
-          saveAccessToken(access_token);
-          
-          redirect(ROUTES.HOME);
-          formulario.reset();
+            mensajeButtonLogin.textContent = respuesta.messaje;
+            
+            const { access_token } = await respuesta.json();
+            saveAccessToken(access_token);
+            
+            redirect(ROUTES.HOME);
+            formulario.reset();
             
         }else {
             const errorData = await respuesta.json();
             if (respuesta.status === 400) {
                 
-                mensajesCorreo.textContent = "";
+                mensajeButtonLogin.textContent = "";
         
-                mensajesCorreo.textContent = errorData.error ;
+                mensajeButtonLogin.textContent = errorData.error ;
             
             }else {
             alert("Error: " + errorData.error);
