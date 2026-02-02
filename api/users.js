@@ -133,9 +133,10 @@ usersRouter.get("/", authMiddleware, async (req, res) => {
 
 usersRouter.get("/:username/snippets", async (req, res) => {
   const username = req.params.username;
+  const currentUser = getCurrentUser(req);
 
   try {
-    const { rows } = await pool.query(
+    const { rows: snippets } = await pool.query(
       `SELECT
         s.id,
         s.title,
@@ -153,9 +154,20 @@ usersRouter.get("/:username/snippets", async (req, res) => {
       ORDER BY s.created_at DESC`,
       [username],
     );
-
+    
+    // TODO:
+    // Sería más eficiente filtrar en la base de datos.
+    const filteredSnippets = snippets.filter((snippet) => {
+      if (snippet.is_public) {
+        return true
+      }
+      
+      return currentUser && currentUser.id === snippet.user_id;
+    })
+    
+    
     return res.json({
-      data: rows,
+      data: filteredSnippets,
     });
   } catch (_) {
     return res.sendStatus(500);
