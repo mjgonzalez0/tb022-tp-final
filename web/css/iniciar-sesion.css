@@ -6,6 +6,10 @@ body {
     background-color: var(--color-fondo-dos) !important;
 
 }
+p.MensajeError {
+    color: var(--color-letra-error);
+    display: inline;
+}
 #logos {
     position: fixed;
     bottom: 0;          
