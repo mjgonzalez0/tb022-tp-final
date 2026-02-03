@@ -13,10 +13,18 @@ const mensajesPassword = document.getElementById("mensajeContraseña");
 const mensajeButtonLogin = document.getElementById("mensajeIniciarSesion")
 
 const botonCrearNuevaCuenta = document.getElementById('crea-cuenta');
+const botonTema = document.getElementById("boton-tema")
 
-const buttonlogin = document.getElementById("botonIniciarSesion");
+const body = document.body;
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
+
+
+botonTema.addEventListener("click",() => {
+
+    body.classList.toggle("theme-dark");
+
+    })
 
 
 inputCorreo.addEventListener("input",() => {

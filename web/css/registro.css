@@ -5,7 +5,6 @@
 }
 
 body {
-    background-image:url(fondo.jpg);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,11 +19,19 @@ body {
     top: 0;               
     left: 0;
     margin: 10px;
-    background: var(--color-fondo-dos);
     padding: 10px;
     border-radius: 8px;
-    padding: 0px 7px 0px 0px;
-    color: #444444
+    padding: 0px 7px 0px 7px;
+    /* color: #444444 */
+}
+#boton-tema {
+    position: absolute;   
+    top: 0;               
+    left: 75px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    padding: 0px 10px 0px 10px;
 }
 
 #mensajeBotonRegistro {
@@ -37,5 +44,4 @@ p.MensajeError {
 .card {
     width: 60%;
     max-width: 450px;
-    background-color: var(--color-fondo-dos) !important;
 }
