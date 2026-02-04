@@ -1,16 +1,18 @@
 :root {
     --color-fondo-dos: rgba(219, 209, 209, 0.95);
     --color-letra-error: red ;
-    --color-fondo-drak: --color-neutral-105;
-} 
-body {
-    background-color: var(--color-fondo-dos);  
+    --background-color: hsl(var(--color-neutral-0));
 }
+
 body.theme-dark {
-    background-color: var(--color-fondo-drak);  
+    --background-color: hsl(var(--color-neutral-105));
 }
+
+body {
+    background-color: var(--background-color);  
+}
+
 #contenido {
-    
     display: flex;
     flex-wrap: wrap;   
     gap: 20px;                 

@@ -1,6 +1,8 @@
 import { redirect, ROUTES } from "./routes.js";
 import { API_URL } from "./constants.js";
 import { saveAccessToken } from "./token.js";
+import { setThemeFromSystem } from "./theme.js";
+setThemeFromSystem();
 
 const formulario = document.getElementById("formulario");
 

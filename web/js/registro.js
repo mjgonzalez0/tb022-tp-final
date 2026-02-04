@@ -1,6 +1,8 @@
 import { redirect, ROUTES } from "./routes.js";
 import { API_URL } from "./constants.js";
 import { toast } from "https://unpkg.com/@moaqzdev/toast/utils";
+import { setThemeFromSystem } from "./theme.js";
+setThemeFromSystem();
 
 const formulario = document.getElementById("formulario");
 const body = document.body;
