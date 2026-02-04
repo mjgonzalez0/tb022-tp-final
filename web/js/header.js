@@ -11,6 +11,11 @@ export function initializeHeader(user) {
           <img src="/assets/icon.png" alt="Snippets logo" width="24" height="24">
           Snippets
       </a>
+      <div>
+          <button id="boton-tema" class="button is-secondary" type="button" aria-label="Add new item">
+              <span class="text icon-sun "></span>
+          </button>
+      </div> 
 
       <div class="u-flex u-gap-12">
         ${hasUser
