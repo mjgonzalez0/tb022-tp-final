@@ -1,6 +1,6 @@
 :root {
     --color-fondo-dos: rgba(219, 209, 209, 0.95);
-    --color-letra-error: red ;
+    --color-letra-error: red;
     --background-color: hsl(var(--color-neutral-0));
 }
 
@@ -9,7 +9,7 @@ body.theme-dark {
 }
 
 body {
-    background-color: var(--background-color);  
+    background-color: var(--background-color);
 }
 
 #contenido {
@@ -20,58 +20,59 @@ body {
     align-items: center ;   
     min-height: 95vh;
     padding-bottom: 80px;
-
 }
 p.MensajeError {
     color: var(--color-letra-error);
     display: inline;
 }
+
 #logos {
-    height: 10%;
     position: fixed;
-    bottom: 0;          
-    left: 0;        
-    width: 100%;        
-    display: flex;      
-    justify-content: center; 
-    gap: 20px;          
-}
-#logos span {
-    font-size: 30px;   
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    gap: 1.25rem;
+    border-inline: none;
+    border-radius: 0;
+    max-width: none;
+    
+    & span {
+        font-size: 2rem;
+    }
 }
 
 #sticker {
     font-size: 80px;
 }
 
-.frace {
-    width: 600px;            
-    padding: 20px;
-    border-radius: 8px;
-}
-.frace .titulo h1 {
-    font-size: 58px;
-}
-.frace .parrafo {
-    height: 10%;
-    width: 100%; 
-    
-}
 .card {
-    flex: 1 1 450px;           
-    max-width: 350px;         
+    flex: 1 1 450px;
+    max-width: 350px;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    
-
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
+
 #boton-tema {
-    position: absolute;   
-    top: 0;               
+    position: absolute;
+    top: 0;
     left: 10px;
     margin: 10px;
     padding: 10px;
     border-radius: 8px;
     padding: 0px 10px 0px 10px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.content {
+    margin-top: 3rem;
+    padding: 1rem;
 }
