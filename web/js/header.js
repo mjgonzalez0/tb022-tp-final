@@ -3,48 +3,29 @@ import { deleteAccessToken } from "./token.js";
 
 export function initializeHeader(user) {
   const header = document.createElement("header");
-  const hasUser = Object.keys(user).length !== 0
+  const hasUser = Object.keys(user).length !== 0;
 
-  header.innerHTML = /* html */`
+  header.innerHTML = /* html */ `
     <nav class="container">
       <a href="/" class="heading-level-6 u-flex u-gap-4 u-cross-center">
           <img src="/assets/icon.png" alt="Snippets logo" width="24" height="24">
           Snippets
       </a>
-      <div>
-          <button id="boton-tema" class="button is-secondary" type="button" aria-label="Add new item">
-              <span class="text icon-sun "></span>
-          </button>
-      </div> 
 
       <div class="u-flex u-gap-12">
-        ${hasUser
-      ? `
+        ${
+          hasUser
+            ? `
             <a href=${ROUTES.PROFILE} type="button" class="button is-secondary">Perfil</a>
             <button type="button" class="button" id="logout-btn">Cerrar sesión</button>
           `
-      : `<a href=${ROUTES.LOGIN} class="button">Iniciar sesión</a>`
-    }
+            : `<a href=${ROUTES.LOGIN} class="button">Iniciar sesión</a>`
+        }
       </div>
     </nav>
   `;
 
-
   document.body.insertAdjacentElement("afterbegin", header);
-
-  const botonTema = header.querySelector("#boton-tema");
-  if (botonTema) {
-    botonTema.addEventListener("click", () => {
-      document.body.classList.toggle("theme-dark");
-      
-      const icono = botonTema.querySelector("span");
-      if (document.body.classList.contains("theme-dark")) {
-        icono.classList.replace("icon-moon", "icon-sun" );
-      } else {
-        icono.classList.replace("icon-sun","icon-moon");
-      }
-    });
-  }
 
   if (!hasUser) {
     return;

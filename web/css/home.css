@@ -1,19 +1,10 @@
-body.theme-dark .snippet {
-    display: flex;
-    flex-direction: column;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    border: 1px solid hsl(var(--color-border));
-    background-color: hsl(var(--color-neutral-90));
-}
-
 .snippet {
     display: flex;
     flex-direction: column;
     padding: 0.75rem;
     border-radius: 0.5rem;
-    border: 1px solid hsl(var(--color-border));
-    background-color: hsl(var(--color-neutral-20));
+    border: 1px solid var(--snippet-border-color);
+    background-color: var(--snippet-background-color);
 }
 
 .info li:not(:last-child)::after {
