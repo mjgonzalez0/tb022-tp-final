@@ -1,5 +1,6 @@
 import { getCurrentUser } from "./auth.js";
 import { redirect, ROUTES } from "./routes.js";
+import { setThemeFromSystem } from "./theme.js";
 
 // Inicializa la página siguiendo este flujo:
 //
@@ -26,6 +27,7 @@ export async function initializePage({
     return;
   }
 
+  setThemeFromSystem();
   loader?.remove();
   await onReady(user);
 }

@@ -7,6 +7,7 @@ import { getIdFromParam } from "./params.js";
 
 import { codeToHtml } from "https://esm.sh/shiki@3.0.0";
 import { toast } from "https://unpkg.com/@moaqzdev/toast/utils";
+import { THEME_EVENT } from "./theme.js";
 
 await initializePage({
   onReady: async (user) => {
@@ -92,9 +93,17 @@ await initializePage({
       editBtnEl.setAttribute("href", route);
     }
 
+    document.addEventListener(THEME_EVENT, async function (event) {
+      elements.code.innerHTML = await codeToHtml(snippet.code, {
+        lang: snippet.runtime,
+        theme: event.detail.isDark ? "kanagawa-dragon" : "vitesse-light",
+      });
+    });
+
+    const isDarkMode = document.body.classList.contains("theme-dark");
     elements.code.innerHTML = await codeToHtml(snippet.code, {
       lang: snippet.runtime,
-      theme: "kanagawa-dragon",
+      theme: isDarkMode ? "kanagawa-dragon" : "vitesse-light",
     });
   },
 });

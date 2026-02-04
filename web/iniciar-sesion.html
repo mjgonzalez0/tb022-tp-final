@@ -17,76 +17,78 @@
     <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink-icons" />
     <link rel="stylesheet" href="./css/iniciar-sesion.css">
 </head>
-<body>
-    <div class="frace" >
-        <div class="titulo">
-            <h1 class="heading-level-1" >
-                <span class="u-color-text-pink">S</span><span>ni</span><span class="u-color-text-pink">pp</span><span">et</span><span class="u-color-text-pink">s</span><span id="sticker" class="icon-rss" color="--color-neutral-105"></span>  
-            </h1>
-        </div>
-        <br>
-        <div class="parrafo">
-            <h4 class="heading-level-4" >
-                <span> Con  </span>
-                <span class="heading-level-4"> 
-                    <span class="u-color-text-pink">S</span><span>ni</span ><span class="u-color-text-pink">pp</span><span">et</span><span class="u-color-text-pink">s</span>
-                </span>
-                <span> puedes  </span>
-                <span class="u-color-text-pink"> compartir  </span>
-                <span> tus brillantes ideas en  </span>
-                <span class="u-color-text-pink"> código </span>
-                <span> de manera sencilla y rápida en cualquier </span>
-                <span class="u-color-text-pink"> lenguaje</span><span>. </span>
-            </h4>
-        </div>
-    </div> 
-
-    <article class="card">
-        <form id="formulario"  class="form u-width-full-line u-max-width-500" novalidate>
-            <h3 class="heading-level-3 u-text-center" >Iniciar sesión </h3>
-            <br>
-            <ul class="form-list">
-                <li class="form-item">
-                    <label class="label" for="correo">Correo electrónico </label>
-                    <div  class="input-text-wrapper">
-                        <input 
-                        id="correo"
-                        type="email" 
-                        class="input-text" 
-                        name="correo" 
-                        placeholder="Ejemplo@gmail.com" 
-                        required>
-                        <p id="mensajeCorreo" class="MensajeError"></p>
-                    </div>
-                </li>
-                <li class="form-item ">
-                    <div  class="input-text-wrapper">
-                        <input 
-                        type="password" 
-                        placeholder="Contraseña"
-                        class="input-text" 
-                        name="contraseña" 
-                        id="contraseña"
-                        required>
-                        <p id="mensajeContraseña" class="MensajeError"></p>
-                    </div>
-                </li>
-            </ul>
-            <br>
-            <br>
-            <div class="u-flex u-main-center u-gap-12" >
-                <button class="button" id="botonIniciarSesion" type="submit">Iniciar sesión</button>
+<body class="theme-dark">
+    <div id="contenido">
+        <div class="frace" >
+            <div class="titulo">
+                <h1 class="heading-level-1" >
+                    <span class="u-color-text-pink">S</span><span>ni</span><span class="u-color-text-pink">pp</span><span>et</span><span class="u-color-text-pink">s</span><span id="sticker" class="icon-rss" color="--color-neutral-105"></span>  
+                </h1>
             </div>
             <br>
-        </form>
-        <div class="u-flex u-main-center u-gap-12" >
-            <button class="button is-secondary" id="crea-cuenta" >Crear cuenta nueva </button>
-        </div>
-        <div class="u-flex u-main-center u-gap-12">
-            <p id="mensajeIniciarSesion" class="MensajeError u-text-center"></p>  
-        </div>
-    </article>
-    <div id="logos" class="action-bar" >
+            <div class="parrafo">
+                <h4 class="heading-level-4" >
+                    <span> Con  </span>
+                    <span class="heading-level-4"> 
+                    <span class="u-color-text-pink">S</span><span>ni</span ><span class="u-color-text-pink">pp</span><span>et</span><span class="u-color-text-pink">s</span>
+                    </span>
+                    <span> puedes  </span>
+                    <span class="u-color-text-pink"> compartir  </span>
+                    <span> tus brillantes ideas en  </span>
+                    <span class="u-color-text-pink"> código </span>
+                    <span> de manera sencilla y rápida en cualquier </span>
+                    <span class="u-color-text-pink"> lenguaje</span><span>. </span>
+                </h4>
+            </div>
+        </div> 
+
+        <article class="card">
+            <form id="formulario"  class="form u-width-full-line u-max-width-500" novalidate>
+                <h3 class="heading-level-3 u-text-center" >Iniciar sesión </h3>
+                <br>
+                <ul class="form-list">
+                    <li class="form-item">
+                        <label class="label" for="correo">Correo electrónico </label>
+                        <div  class="input-text-wrapper">
+                            <input 
+                            id="correo"
+                            type="email" 
+                            class="input-text" 
+                            name="correo" 
+                            placeholder="Ejemplo@gmail.com" 
+                            required>
+                            <p id="mensajeCorreo" class="MensajeError"></p>
+                        </div>
+                    </li>
+                    <li class="form-item ">
+                        <div  class="input-text-wrapper">
+                            <input 
+                            type="password" 
+                            placeholder="Contraseña"
+                            class="input-text" 
+                            name="contraseña" 
+                            id="contraseña"
+                            required>
+                            <p id="mensajeContraseña" class="MensajeError"></p>
+                        </div>
+                    </li>
+                </ul>
+                <br>
+                <br>
+                <div class="u-flex u-main-center u-gap-12" >
+                    <button class="button" id="botonIniciarSesion" type="submit">Iniciar sesión</button>
+                </div>
+                <br>
+            </form>
+            <div class="u-flex u-main-center u-gap-12" >
+                <button class="button is-secondary" id="crea-cuenta" >Crear cuenta nueva </button>
+            </div>
+            <div class="u-flex u-main-center u-gap-12">
+                <p id="mensajeIniciarSesion" class="MensajeError u-text-center"></p>  
+            </div>
+        </article>
+    </div>
+        <div id="logos" class="action-bar" >
             <div >
                 <span class="icon-git" ></span>
             </div>
@@ -125,6 +127,11 @@
             </div>
             
     </div>
+    <div>
+        <button id="boton-tema" class="button is-secondary" type="button" aria-label="Add new item">
+            <span class="text icon-sun "></span>
+        </button>
+    </div> 
 
 
     <script type="module" src="./js/iniciar-sesion.js"> </script>

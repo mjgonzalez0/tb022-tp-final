@@ -1,8 +1,11 @@
 import { redirect, ROUTES } from "./routes.js";
 import { API_URL } from "./constants.js";
 import { toast } from "https://unpkg.com/@moaqzdev/toast/utils";
+import { setThemeFromSystem } from "./theme.js";
+setThemeFromSystem();
 
 const formulario = document.getElementById("formulario");
+const body = document.body;
 
 const inputUser = document.getElementById("usuario");
 const inputCorreo = document.getElementById("correo");
@@ -15,12 +18,17 @@ const mensajePassword1 = document.getElementById("mensajeContraseña");
 const mensajePassword2  = document.getElementById("mensajeRepContraseña");
 const mensajeButtonRegister = document.getElementById("mensajeBotonRegistro");
 
-const botonRegister = document.getElementById("botonRegistro");
 const botonLogin = document.getElementById("botonLogin"); 
 const botonAtras = document.getElementById('boton-atras');
+const botonTema = document.getElementById("boton-tema"); 
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
+botonTema.addEventListener("click",() => {
+
+    body.classList.toggle("theme-dark");
+
+    })
 
 inputCorreo.addEventListener("input",() => {
 

@@ -3,9 +3,9 @@ import { deleteAccessToken } from "./token.js";
 
 export function initializeHeader(user) {
   const header = document.createElement("header");
-  const hasUser = Object.keys(user).length !== 0
+  const hasUser = Object.keys(user).length !== 0;
 
-  header.innerHTML = /* html */`
+  header.innerHTML = /* html */ `
     <nav class="container">
       <a href="/" class="heading-level-6 u-flex u-gap-4 u-cross-center">
           <img src="/assets/icon.png" alt="Snippets logo" width="24" height="24">
@@ -13,13 +13,14 @@ export function initializeHeader(user) {
       </a>
 
       <div class="u-flex u-gap-12">
-        ${hasUser
-      ? `
+        ${
+          hasUser
+            ? `
             <a href=${ROUTES.PROFILE} type="button" class="button is-secondary">Perfil</a>
             <button type="button" class="button" id="logout-btn">Cerrar sesión</button>
           `
-      : `<a href=${ROUTES.LOGIN} class="button">Iniciar sesión</a>`
-    }
+            : `<a href=${ROUTES.LOGIN} class="button">Iniciar sesión</a>`
+        }
       </div>
     </nav>
   `;

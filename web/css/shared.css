@@ -1,6 +1,20 @@
 :root {
     --screen-size: 760px;
     --editor-min-height: 300px;
+
+    --snippet-background-color: hsl(var(--color-neutral-0));
+    --snippet-border-color: hsl(var(--color-border));
+
+    --badge-background-color: hsl(var(--color-neutral-0));
+    --badge-border-color: hsl(var(--color-border));
+}
+
+body.theme-dark {
+    --snippet-background-color: hsl(var(--color-neutral-90));
+    --snippet-border-color: hsl(var(--color-border));
+
+    --badge-background-color: hsl(var(--color-neutral-90));
+    --badge-border-color: hsl(var(--color-border));
 }
 
 body {
@@ -58,10 +72,10 @@ dialog:not([open]) {
     align-items: center;
     gap: 0.5rem;
     transition: opacity 200ms ease-in;
-    border: 1px solid hsl(var(--color-border));
+    border: 1px solid var(--badge-border-color);
     padding-inline: 0.5rem;
     border-radius: 0.25rem;
-    background-color: hsl(var(--color-neutral-90));
+    background-color: var(--badge-background-color);
 
     &:hover {
         opacity: 0.8;

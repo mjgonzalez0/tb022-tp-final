@@ -1,9 +1,25 @@
 :root {
     --color-fondo-dos: rgba(219, 209, 209, 0.95);
     --color-letra-error: red ;
-} 
+    --background-color: hsl(var(--color-neutral-0));
+}
+
+body.theme-dark {
+    --background-color: hsl(var(--color-neutral-105));
+}
+
 body {
-    background-color: var(--color-fondo-dos) !important;
+    background-color: var(--background-color);  
+}
+
+#contenido {
+    display: flex;
+    flex-wrap: wrap;   
+    gap: 20px;                 
+    justify-content: center;   
+    align-items: center ;   
+    min-height: 95vh;
+    padding-bottom: 80px;
 
 }
 p.MensajeError {
@@ -11,24 +27,24 @@ p.MensajeError {
     display: inline;
 }
 #logos {
+    height: 10%;
     position: fixed;
     bottom: 0;          
-    left: 0;            
+    left: 0;        
     width: 100%;        
     display: flex;      
     justify-content: center; 
     gap: 20px;          
-    background: #f9f9f9;
 }
+#logos span {
+    font-size: 30px;   
+}
+
 #sticker {
     font-size: 80px;
 }
 
 .frace {
-    position: absolute;       
-    top: 50%;               
-    left: 35%;                
-    transform: translate(-50%, -50%); 
     width: 600px;            
     padding: 20px;
     border-radius: 8px;
@@ -42,16 +58,20 @@ p.MensajeError {
     
 }
 .card {
-    position: absolute;       
-    top: 50%;                 
-    left: 75%;                
-    transform: translate(-50%, -50%);             
+    flex: 1 1 450px;           
+    max-width: 350px;         
     padding: 20px;
-    background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    border-radius: 8px;
-    width: 25%; 
     
-}
 
+}
+#boton-tema {
+    position: absolute;   
+    top: 0;               
+    left: 10px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    padding: 0px 10px 0px 10px;
+}
