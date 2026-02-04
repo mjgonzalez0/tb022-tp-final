@@ -29,7 +29,22 @@ export function initializeHeader(user) {
     </nav>
   `;
 
+
   document.body.insertAdjacentElement("afterbegin", header);
+
+  const botonTema = header.querySelector("#boton-tema");
+  if (botonTema) {
+    botonTema.addEventListener("click", () => {
+      document.body.classList.toggle("theme-dark");
+      
+      const icono = botonTema.querySelector("span");
+      if (document.body.classList.contains("theme-dark")) {
+        icono.classList.replace("icon-moon", "icon-sun" );
+      } else {
+        icono.classList.replace("icon-sun","icon-moon");
+      }
+    });
+  }
 
   if (!hasUser) {
     return;

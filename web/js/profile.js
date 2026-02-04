@@ -5,6 +5,8 @@ import { $fetch } from "./fetch.js";
 import { getUsernameFromParam } from "./params.js";
 import { renderSnippets } from "./snippet-section.js";
 
+const body = document.body;
+
 await initializePage({
   onReady: async (user) => {
     initializeHeader(user);
