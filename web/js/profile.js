@@ -35,6 +35,7 @@ async function renderUserInfo(username, currentUserId) {
     username: document.querySelector("#user-username"),
     bio: document.querySelector("#user-bio"),
     joinedDate: document.querySelector("#user-joined-date"),
+    location: document.querySelector("#user-location"),
   };
 
   elements.username.textContent = userProfile.username;
@@ -46,6 +47,12 @@ async function renderUserInfo(username, currentUserId) {
   }).format(new Date(userProfile.created_at));
 
   elements.joinedDate.textContent = `Se unió el ${formattedDate}`;
+
+  if (userProfile.location) {
+    elements.location.textContent = userProfile.location;
+  } else {
+    elements.location.parentElement.remove();
+  }
 
   if (userProfile.id === currentUserId) {
     const editProfileBtn = document.querySelector("#edit-profile-btn");

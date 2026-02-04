@@ -113,7 +113,7 @@ usersRouter.get("/", authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
     const { rows } = await pool.query(
-      "SELECT id, username, email, bio, created_at, updated_at FROM users WHERE id = $1",
+      "SELECT id, username, email, bio, location, created_at, updated_at FROM users WHERE id = $1",
       [userId],
     );
 
@@ -179,7 +179,7 @@ usersRouter.get("/:username", async (req, res) => {
 
   try {
     const { rows } = await pool.query(
-      "SELECT id, username, email, bio, created_at, updated_at FROM users WHERE username = $1",
+      "SELECT id, username, email, bio, location, created_at, updated_at FROM users WHERE username = $1",
       [username]
     );
     
@@ -198,7 +198,7 @@ usersRouter.get("/:username", async (req, res) => {
 });
 
 usersRouter.patch("/", authMiddleware, async (req, res) => {
-  const { username, bio } = req.body;
+  const { username, bio, location } = req.body;
   const userId = req.user.id;
 
   const queryColumns = [];
@@ -214,6 +214,12 @@ usersRouter.patch("/", authMiddleware, async (req, res) => {
   if (typeof bio === "string" && bio.trim().length > 0) {
     queryColumns.push(`bio = $${valuesCount}`);
     queryValues.push(bio.trim());
+    valuesCount++;
+  }
+  
+  if (typeof location === "string" && location.trim().length > 0) {
+    queryColumns.push(`location = $${valuesCount}`);
+    queryValues.push(location.trim());
     valuesCount++;
   }
 

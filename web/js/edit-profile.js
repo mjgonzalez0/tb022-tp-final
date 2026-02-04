@@ -14,11 +14,13 @@ await initializePage({
       email: document.querySelector("#email"),
       username: document.querySelector("#username"),
       bio: document.querySelector("#bio"),
+      location: document.querySelector("#location"),
     };
 
     fields.username.value = user.username;
     fields.bio.value = user.bio;
     fields.email.value = user.email;
+    fields.location.value = user.location;
 
     document
       .querySelector("#profile-form")
@@ -32,6 +34,7 @@ await initializePage({
           body: {
             username: formData.get("username"),
             bio: formData.get("bio"),
+            location: formData.get("location"),
           },
         });
 
