@@ -3,6 +3,10 @@ import { initializeHeader } from "./header.js";
 import { renderSnippets } from "./snippet-section.js";
 import { $fetch } from "./fetch.js";
 
+const botonTema = document.getElementById("boton-tema")
+
+const body = document.body;
+
 await initializePage({
   onReady: async (user) => {
     initializeHeader(user);
@@ -51,3 +55,9 @@ await initializePage({
     renderSnippets(data);
   },
 });
+
+botonTema.addEventListener("click",() => {
+
+  body.classList.toggle("theme-dark");
+
+  })
