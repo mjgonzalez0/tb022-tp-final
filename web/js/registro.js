@@ -122,11 +122,11 @@ await initializePage({
           body: JSON.stringify(datos),
         });
 
-        const resData = await respuesta.json();
         if (respuesta.ok) {
           formulario.reset();
           redirect(ROUTES.LOGIN);
         } else if (respuesta.status === 409) {
+          const resData = await respuesta.json();
           toast.error({
             title: "Usuario o correo ya registrado",
             description: "Intenta con un nombre de usuario o correo diferente.",
