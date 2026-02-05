@@ -1,140 +1,153 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Iniciar sesión</title>
-    <meta name="description" content="Una plataforma para compartir snippets de código.">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Iniciar sesión">
-    <meta property="og:description" content="Una plataforma para compartir snippets de código.">
-    <meta name="theme-color" content="#f02d65">
-    <meta property="og:image" content="/assets/og_image.png">
-    <link rel="icon" href="/assets/favicon.ico" />
-        
-    <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
-    <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink-icons" />
-    <link rel="stylesheet" href="./css/iniciar-sesion.css">
-</head>
-<body class="theme-dark">
-    <div id="contenido">
-        <div class="frace" >
-            <div class="titulo">
-                <h1 class="heading-level-1" >
-                    <span class="u-color-text-pink">S</span><span>ni</span><span class="u-color-text-pink">pp</span><span>et</span><span class="u-color-text-pink">s</span><span id="sticker" class="icon-rss" color="--color-neutral-105"></span>  
-                </h1>
-            </div>
-            <br>
-            <div class="parrafo">
-                <h4 class="heading-level-4" >
-                    <span> Con  </span>
-                    <span class="heading-level-4"> 
-                    <span class="u-color-text-pink">S</span><span>ni</span ><span class="u-color-text-pink">pp</span><span>et</span><span class="u-color-text-pink">s</span>
-                    </span>
-                    <span> puedes  </span>
-                    <span class="u-color-text-pink"> compartir  </span>
-                    <span> tus brillantes ideas en  </span>
-                    <span class="u-color-text-pink"> código </span>
-                    <span> de manera sencilla y rápida en cualquier </span>
-                    <span class="u-color-text-pink"> lenguaje</span><span>. </span>
-                </h4>
-            </div>
-        </div> 
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Iniciar sesión</title>
+        <meta
+            name="description"
+            content="Una plataforma para compartir snippets de código."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Iniciar sesión" />
+        <meta
+            property="og:description"
+            content="Una plataforma para compartir snippets de código."
+        />
+        <meta name="theme-color" content="#f02d65" />
+        <meta property="og:image" content="/assets/og_image.png" />
+        <link rel="icon" href="/assets/favicon.ico" />
 
-        <article class="card">
-            <form id="formulario"  class="form u-width-full-line u-max-width-500" novalidate>
-                <h3 class="heading-level-3 u-text-center" >Iniciar sesión </h3>
-                <br>
-                <ul class="form-list">
-                    <li class="form-item">
-                        <label class="label" for="correo">Correo electrónico </label>
-                        <div  class="input-text-wrapper">
-                            <input 
-                            id="correo"
-                            type="email" 
-                            class="input-text" 
-                            name="correo" 
-                            placeholder="Ejemplo@gmail.com" 
-                            required>
-                            <p id="mensajeCorreo" class="MensajeError"></p>
-                        </div>
-                    </li>
-                    <li class="form-item ">
-                        <div  class="input-text-wrapper">
-                            <input 
-                            type="password" 
-                            placeholder="Contraseña"
-                            class="input-text" 
-                            name="contraseña" 
-                            id="contraseña"
-                            required>
-                            <p id="mensajeContraseña" class="MensajeError"></p>
-                        </div>
-                    </li>
-                </ul>
-                <br>
-                <br>
-                <div class="u-flex u-main-center u-gap-12" >
-                    <button class="button" id="botonIniciarSesion" type="submit">Iniciar sesión</button>
+        <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@appwrite.io/pink-icons"
+        />
+
+        <link rel="stylesheet" href="./css/iniciar-sesion.css" />
+    </head>
+    <body class="theme-dark">
+        <section id="contenido" class="content">
+            <div class="u-max-width-400">
+                <div class="logo">
+                    <img
+                        src="/assets/icon.png"
+                        alt="Snippets logo"
+                        width="60"
+                        height="60"
+                    />
+                    <h1 class="heading-level-1">Snippets</h1>
                 </div>
-                <br>
-            </form>
-            <div class="u-flex u-main-center u-gap-12" >
-                <button class="button is-secondary" id="crea-cuenta" >Crear cuenta nueva </button>
+
+                <p class="body-text-1 text">
+                    <span class="u-color-text-pink u-bold">Comparte </span>
+                    tus brillantes ideas en
+                    <span class="u-color-text-pink u-bold"> código </span>
+                    de manera sencilla y rápida en cualquier lenguaje.
+                </p>
             </div>
-            <div class="u-flex u-main-center u-gap-12">
-                <p id="mensajeIniciarSesion" class="MensajeError u-text-center"></p>  
-            </div>
-        </article>
-    </div>
-        <div id="logos" class="action-bar" >
-            <div >
-                <span class="icon-git" ></span>
-            </div>
-            <div >
-                <span class="icon-js" ></span>
-            </div>
-            <div >
-                <span class="icon-github" ></span>
-            </div>
-            <div >
-                <span class="icon-go" ></span>
-            </div>
-            <div >
-                <span class="icon-html5" ></span>
-            </div>
-            <div >
-                <span class="icon-java" ></span>
-            </div>
-            <div >
-                <span class="icon-python" ></span>
-            </div>
-            <div >
-                <span class="icon-react" ></span>
-            </div>
-            <div >
-                <span class="icon-vs_code" ></span>
-            </div>
-            <div >
-                <span class="icon-css3" ></span>
-            </div>
-            <div >
-                <span class="icon-cpp" ></span>
-            </div>
-            <div >
-                <span class="icon-docker" ></span>
-            </div>
-            
-    </div>
-    <div>
-        <button id="boton-tema" class="button is-secondary" type="button" aria-label="Add new item">
-            <span class="text icon-sun "></span>
+
+            <article class="card">
+                <form
+                    id="formulario"
+                    class="form u-width-full-line u-max-width-500 u-flex u-flex-vertical u-gap-24"
+                    novalidate
+                >
+                    <h3 class="heading-level-4">Iniciar sesión</h3>
+
+                    <ul class="form-list">
+                        <li class="form-item">
+                            <label class="label" for="correo">
+                                Correo electrónico
+                            </label>
+
+                            <div class="input-text-wrapper">
+                                <input
+                                    id="correo"
+                                    type="email"
+                                    class="input-text"
+                                    name="correo"
+                                    placeholder="Ejemplo@gmail.com"
+                                    required
+                                />
+
+                                <p id="mensajeCorreo" class="MensajeError"></p>
+                            </div>
+                        </li>
+
+                        <li class="form-item">
+                            <label for="contraseña" class="label"
+                                >Contraseña</label
+                            >
+                            <div class="input-text-wrapper">
+                                <input
+                                    type="password"
+                                    placeholder="Contraseña"
+                                    class="input-text"
+                                    name="contraseña"
+                                    id="contraseña"
+                                    required
+                                />
+                                <p
+                                    id="mensajeContraseña"
+                                    class="MensajeError"
+                                ></p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="u-flex u-gap-12">
+                        <button
+                            class="button"
+                            id="botonIniciarSesion"
+                            type="submit"
+                        >
+                            Iniciar sesión
+                        </button>
+
+                        <button
+                            type="button"
+                            class="button is-secondary"
+                            id="crea-cuenta"
+                        >
+                            Crear cuenta
+                        </button>
+                    </div>
+                </form>
+
+                <div class="u-flex u-main-center u-gap-12">
+                    <p
+                        id="mensajeIniciarSesion"
+                        class="MensajeError u-text-center"
+                    ></p>
+                </div>
+            </article>
+        </section>
+
+        <div id="logos" class="action-bar">
+            <span class="icon-git text-xs"></span>
+            <span class="icon-js"></span>
+            <span class="icon-github"></span>
+            <span class="icon-go"></span>
+            <span class="icon-html5"></span>
+            <span class="icon-java"></span>
+            <span class="icon-python"></span>
+            <span class="icon-react"></span>
+            <span class="icon-vs_code"></span>
+            <span class="icon-css3"></span>
+            <span class="icon-cpp"></span>
+            <span class="icon-docker"></span>
+        </div>
+
+        <button
+            id="boton-tema"
+            class="button is-secondary"
+            type="button"
+            aria-label="Add new item"
+        >
+            <span class="text icon-sun"></span>
         </button>
-    </div> 
 
-
-    <script type="module" src="./js/iniciar-sesion.js"> </script>
-</body>
-
+        <script type="module" src="./js/iniciar-sesion.js"></script>
+    </body>
 </html>

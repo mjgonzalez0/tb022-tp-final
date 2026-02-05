@@ -17,12 +17,13 @@ export async function initializePage({
   const loader = document.querySelector("#loading-state");
 
   const user = await getCurrentUser();
-  if (requiresAuth && !Object.keys(user).length) {
+  const isAuthenticated = Object.keys(user).length;
+  if (requiresAuth && !isAuthenticated) {
     redirect(ROUTES.LOGIN);
     return;
   }
 
-  if (guestOnly && user) {
+  if (guestOnly && isAuthenticated) {
     redirect(ROUTES.HOME);
     return;
   }
